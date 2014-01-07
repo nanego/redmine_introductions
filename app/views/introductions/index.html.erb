@@ -36,11 +36,11 @@
         <tr class="<%= cycle("odd", "even") %> introduction">
           <td style="text-align: center;width: 10px;"><%= link_to introduction.id, edit_introduction_path(introduction) %></td>
           <td><%= link_to introduction.name, edit_introduction_path(introduction) %></td>
-          <td><%= link_to introduction.url, "#{request.protocol}#{request.host_with_port}#{introduction.url}" %></td>
+          <td><%= link_to introduction.url, link_to_intro_test(introduction) %></td>
           <td><%= introduction.start_at %></td>
           <td><%= introduction.stop_at %></td>
           <td class="buttons">
-              <%= link_to l(:button_start), "#{request.protocol}#{request.host_with_port}#{introduction.url}", :class => 'icon icon-test' %>
+              <%= link_to l(:button_start), link_to_intro_test(introduction), :class => 'icon icon-test' %>
               <%= link_to l(:button_edit), edit_introduction_path(id: introduction.id), :class => 'icon icon-edit' %>
               <%= delete_link introduction_path(introduction) %>
           </td>

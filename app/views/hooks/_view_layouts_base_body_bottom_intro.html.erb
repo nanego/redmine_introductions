@@ -3,7 +3,7 @@
 
     <% @intros = Introduction.active.not_disabled_by_user(User.current) %>
     <% @intros.each do |intro| %>
-      <% if !intro.users.include?(User.current) && (intro.url.blank? || request.fullpath =~ Regexp.new("#{intro.url}")) %>
+      <% if User.current.pref.no_introductions == '0' && !intro.users.include?(User.current) && (intro.url.blank? || request.fullpath =~ Regexp.new("#{intro.url}")) %>
         <% intro.introduction_steps.each do |step| %>
           setIntroParams("<%= step.selector %>", "<%= step.text %>", "<%= step.position %>", "<%= step.step %>");
         <% end %>
@@ -13,5 +13,6 @@
       <% end %>
     <% end %>
     startIntroductions();
+
   });
 </script>

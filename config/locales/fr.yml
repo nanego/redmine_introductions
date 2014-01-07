@@ -13,7 +13,7 @@ fr:
   remove_step: "Supprimer cette étape"
   introductions: "Présentations"
   add_step: "Ajouter une étape"
-  button_start: "Démarrer"
+  button_start: "Tester"
   new_intro: "Nouvelle présentation"
   edit_introduction: "Modifier la présentation"
   save: "Enregistrer"
@@ -25,3 +25,4 @@ fr:
   left: "Gauche"
   right: "Droite"
   button_confirm: "Confirmer"
+  field_no_introductions: "Ne pas afficher les présentations des nouvelles fonctionnalités"

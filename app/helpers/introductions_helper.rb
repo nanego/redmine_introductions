@@ -9,4 +9,8 @@ module IntroductionsHelper
     link_to(name, '#', class: "add_fields icon icon-add", data: {id: id, fields: fields.gsub("\n", "")})
   end
 
+  def link_to_intro_test(introduction)
+    "#{request.protocol}#{request.host_with_port}#{introduction.url.tr('^', '')}"
+  end
+
 end
