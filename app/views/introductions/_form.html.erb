@@ -1,0 +1,53 @@
+<%= form_for(@introduction) do |f| %>
+
+  <div class="box tabular">
+    <div id="introduction_form">
+
+      <% @introduction.errors.full_messages.each do |msg| %>
+        <p><%= msg %></p>
+      <% end %>
+
+      <p>
+        <%= f.label l('introduction_name') %>
+        <%= f.text_field :name, :size => 70, :disabled => false, :required => true %>
+      </p>
+
+      <p>
+        <%= f.label :url %>
+        <%= f.text_field :url, :size => 70, :disabled => false, :required => false %>
+        <%= l('hint_url') %>
+      </p>
+
+      <p>
+        <%= f.label :start_at %>
+        <%= f.text_field :start_at, :size => 10, :disabled => false, :required => false %><%= calendar_for('introduction_start_at') %>
+      </p>
+
+      <p>
+        <%= f.label l('stop_at') %>
+        <%= f.text_field :stop_at, :size => 10, :disabled => false, :required => false %><%= calendar_for('introduction_stop_at') %>
+      </p>
+
+      <ul id="sortable">
+        <%= f.fields_for :introduction_steps do |builder| %>
+          <%= render 'step_fields', f: builder %>
+        <% end %>
+        <%= link_to_add_fields l("add_step"), f, :introduction_steps %>
+      </ul>
+
+    </div>
+  </div>
+
+  <%= submit_tag l('save') %>
+  <%= link_to l('cancel'), introductions_url %>
+
+<% end %>
+
+<script>
+  $(function() {
+    $( "#sortable" ).sortable({
+      update : updateStepsPriorities
+    });
+    $( "#sortable" ).disableSelection();
+  });
+</script>

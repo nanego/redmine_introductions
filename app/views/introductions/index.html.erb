@@ -1,0 +1,53 @@
+<% html_title(l(:label_introductions)) %>
+
+<div class="contextual">
+  <%= link_to(l(:label_new_introduction),
+              {:controller => 'introductions', :action => 'new'},
+              :class => 'icon icon-add') %>
+</div>
+
+<h2><%=h "#{l(:label_introductions)}" %></h2>
+
+<% if @notice -%>
+  <div class="flash notice"><%= @notice -%></div>
+<% end -%>
+
+<% if @introductions.empty? %>
+  <div class="template_box">
+    <%= l(:no_introductions) %>
+  </div>
+<% else %>
+
+  <div class="template_box">
+
+    <table class="list introductions">
+      <thead>
+      <tr>
+        <th><%= '#' %></th>
+        <th><%= l(:field_name) %></th>
+        <th><%= l(:url) %></th>
+        <th><%= l(:start_date) %></th>
+        <th><%= l(:stop_date) %></th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @introductions.each do |introduction| %>
+        <tr class="<%= cycle("odd", "even") %> introduction">
+          <td style="text-align: center;width: 10px;"><%= link_to introduction.id, edit_introduction_path(introduction) %></td>
+          <td><%= link_to introduction.name, edit_introduction_path(introduction) %></td>
+          <td><%= link_to introduction.url, "#{request.protocol}#{request.host_with_port}#{introduction.url}" %></td>
+          <td><%= introduction.start_at %></td>
+          <td><%= introduction.stop_at %></td>
+          <td class="buttons">
+              <%= link_to l(:button_start), "#{request.protocol}#{request.host_with_port}#{introduction.url}", :class => 'icon icon-test' %>
+              <%= link_to l(:button_edit), edit_introduction_path(id: introduction.id), :class => 'icon icon-edit' %>
+              <%= delete_link introduction_path(introduction) %>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+
+<% end %>

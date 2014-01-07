@@ -1,0 +1,23 @@
+#admin-menu a.introductions {
+    background-image: url(../images/slideshow.png);
+}
+
+.label_step_priority {
+    float: right;
+    font-size: 40px;
+    color: #CCCCCC;
+    margin: 15px 0 0 0;
+    height: 28px;
+    text-align: center;
+    width: 64px;
+    cursor: default;
+}
+.drag_arrows{
+    margin-top: 10px;
+    opacity:0.4;
+    filter:alpha(opacity=40); /* For IE8 and earlier */
+}
+
+.ui-state-default a, .ui-state-default a:link.remove_fields{
+    color: #999999;
+}

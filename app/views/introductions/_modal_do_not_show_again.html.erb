@@ -1,0 +1,12 @@
+<h3 class="title"><%= "Ne plus afficher à l'avenir ?" %></h3>
+
+<div class="container">
+Ne plus afficher la présentation lors de vos prochaines visites ?
+</div>
+
+<p class="buttons">
+  <%= form_for :do_not_show_again, url: introductions_do_not_show_again_introduction_url(intro), method: :post, :remote => true do |f| %>
+    <%= f.submit l(:button_confirm) %>
+    <%= submit_tag l(:button_cancel), :name => nil, :onclick => "hideModal(this);", :type => 'button' %>
+  <% end %>
+</p>

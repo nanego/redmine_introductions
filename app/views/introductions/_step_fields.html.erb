@@ -1,0 +1,28 @@
+<li class="ui-state-default" style="margin-bottom: 5px;">
+  <div style="float: right;">
+    <div class="label_step_priority">
+      <%= f.object.step %>
+    </div>
+    <br/>
+    <div class="drag_arrows">
+      <%= image_tag 'drag.png', :plugin => 'redmine_introductions' %>
+    </div>
+  </div>
+  <%= f.hidden_field :step, :size => 10, :disabled => false, :required => false, :class => "order_step" %>
+  <p>
+    <%= f.label l('text') %>
+    <%= f.text_field :text, :size => 70, :disabled => false, :required => false %>
+  </p>
+  <p>
+    <%= f.label l('selector') %>
+    <%= f.text_field :selector, :size => 30, :disabled => false, :required => false %>
+  </p>
+  <p>
+    <%= f.label l('position') %>
+    <%= f.select :position, Introduction::POSITIONS, :disabled => false, :required => false, :selected => f.object.position %>
+  </p>
+  <p>
+    <%= f.hidden_field :_destroy %>
+    <%= link_to l("remove_step"), '#', class: "remove_fields" %>
+  </p>
+</li>
