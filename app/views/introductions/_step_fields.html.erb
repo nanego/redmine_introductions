@@ -23,6 +23,12 @@
     <%= f.label l('position') %>
     <%= f.select :position, Introduction::POSITIONS, :disabled => false, :required => false, :selected => f.object.position %>
   </p>
+
+  <p>
+    <%= f.label :url %>
+    <%= f.text_field :url, :size => 50, :disabled => false, :required => false %>
+  </p>
+
   <p>
     <%= f.hidden_field :_destroy %>
     <%= link_to l("remove_step"), '#', class: "remove_fields" %>

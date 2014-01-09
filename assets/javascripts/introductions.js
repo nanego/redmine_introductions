@@ -4,16 +4,36 @@ function setIntroParams(selector, text, position, step) {
   $(selector).attr('data-step', step);
 }
 
-function startIntroductions() {
-    introJs().setOptions({ 'tooltipClass': "introJsTooltipClass",
-        'showStepNumbers': false,
-        'showButtons': true,
-        'showBullets':false,
-        'doneLabel': 'Fermer',
-        'skipLabel': 'Passer',
-        'prevLabel': '&larr;',
-        'nextLabel': 'Suivant &rarr;'
-    }).start();
+function startIntroductions(next_url, next_step_id) {
+    if(next_url != ""){
+        introJs().setOptions({ 'tooltipClass': "introJsTooltipClass",
+            'showStepNumbers': false,
+            'showButtons': true,
+            'showBullets':false,
+            'doneLabel': 'Page suivante',
+            'skipLabel': 'Passer',
+            'prevLabel': '&larr;',
+            'nextLabel': 'Suivant &rarr;'
+        }).start().oncomplete(function() {
+                window.location.href = next_url + '?multipage=true&intro_step=' + next_step_id;
+            }).onexit(function() {
+                show_modal_do_not_show_again();
+            });
+    }else{
+        introJs().setOptions({ 'tooltipClass': "introJsTooltipClass",
+            'showStepNumbers': false,
+            'showButtons': true,
+            'showBullets':false,
+            'doneLabel': 'Fermer',
+            'skipLabel': 'Passer',
+            'prevLabel': '&larr;',
+            'nextLabel': 'Suivant &rarr;'
+        }).start().oncomplete(function() {
+                show_modal_do_not_show_again();
+            }).onexit(function() {
+                show_modal_do_not_show_again();
+            });
+    }
 }
 
 jQuery(function() {

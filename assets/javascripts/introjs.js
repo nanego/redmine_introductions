@@ -567,9 +567,6 @@
           self._introExitCallback.call(self);
         }
 
-        // CUSTOM // TODO remove from standard intro.js script
-        show_modal_do_not_show_again();
-
         _exitIntro.call(self, self._targetElement);
       };
 

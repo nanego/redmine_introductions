@@ -14,6 +14,10 @@ class IntroductionsController < ApplicationController
   def create
     @introduction = Introduction.new(params[:introduction])
 
+    @introduction.introduction_steps.each do |s|
+      s.step = 1 if s.step.blank?
+    end
+
     respond_to do |format|
       if @introduction.save
         format.html { redirect_to introductions_url, notice: 'New introduction was successfully created.' }
