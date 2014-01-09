@@ -3,9 +3,10 @@
 
     <% @intros = Introduction.active.not_disabled_by_user(User.current) %>
     <% @intros.each do |intro| %>
-      <% if User.current.pref.no_introductions == '0' && !intro.users.include?(User.current) && (intro.url.blank? || request.fullpath =~ Regexp.new("#{intro.url}")) %>
+    <!-- TODO User.current.pref.no_introductions == '0' &&  -->
+      <% if !intro.users.include?(User.current) && (intro.url.blank? || request.fullpath =~ Regexp.new("#{intro.url}")) %>
         <% intro.introduction_steps.each do |step| %>
-          setIntroParams("<%= step.selector %>", "<%= step.text %>", "<%= step.position %>", "<%= step.step %>");
+          setIntroParams("<%= escape_javascript(raw step.selector) %>", "<%= escape_javascript(raw step.text) %>", "<%= escape_javascript(raw step.position) %>", "<%= escape_javascript(raw step.step) %>");
         <% end %>
         $(document).ready(function(){
           $('#ajax-modal').html('<%= escape_javascript(render 'introductions/modal_do_not_show_again', :intro => intro) %>');

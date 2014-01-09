@@ -14,7 +14,7 @@ class Introduction < ActiveRecord::Base
   accepts_nested_attributes_for :introduction_steps, :reject_if => lambda { |a| a[:text].blank? }, :allow_destroy => true
   has_and_belongs_to_many :users
 
-  scope :active, where("(start_at = NULL OR start_at < ?) AND (stop_at = NULL OR stop_at > ?)", DateTime.now, DateTime.now )
+  scope :active, where("(start_at = NULL OR start_at <= ?) AND (stop_at = NULL OR stop_at >= ?)", DateTime.now, DateTime.now )
 
   def self.not_disabled_by_user(user)
     where("")
