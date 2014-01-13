@@ -27,6 +27,7 @@
   <p>
     <%= f.label :url %>
     <%= f.text_field :url, :size => 50, :disabled => false, :required => false %>
+    <span class="hint"> <%= l('hint_url_no_regexp') %> </span>
   </p>
 
   <p>

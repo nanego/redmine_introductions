@@ -21,3 +21,8 @@
 .ui-state-default a, .ui-state-default a:link.remove_fields{
     color: #999999;
 }
+
+.ui-state-default .hint{
+    font-weight: normal;
+    color: #505050;
+}

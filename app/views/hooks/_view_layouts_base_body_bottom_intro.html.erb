@@ -1,10 +1,15 @@
 <script type="text/javascript">
   $(function() {
 
+    var intro_id = 0;
     var next_url = "";
     var next_step_id = 0;
 
-    <% @intros = Introduction.active.not_disabled_by_user(User.current) %>
+    <% if params[:intro_id] %>
+      <% @intros = [Introduction.find(params[:intro_id])] %>
+    <% else %>
+      <% @intros = Introduction.active.not_disabled_by_user(User.current) %>
+    <% end %>
     <% @intros.each do |intro| %>
 
     <!-- TODO User.current.pref.no_introductions == '0' &&  -->
@@ -20,6 +25,7 @@
           <% if started %>
 
             <% if step.url && !step.url.blank? && previous_step && step.url != previous_step.url %>
+              intro_id = <%= intro.id %>;
               next_url = "<%= step.url %>";
               next_step_id = <%= step.id %>;
               <% break %>
@@ -35,7 +41,7 @@
       <% end %>
     <% end %>
 
-    startIntroductions(next_url, next_step_id);
+    startIntroductions(intro_id, next_url, next_step_id);
 
   });
 </script>
