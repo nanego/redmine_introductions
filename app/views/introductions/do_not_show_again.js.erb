@@ -1,1 +1,5 @@
-hideModal();
+<% if @introduction.url.include?('.*') %>
+  hideModal();
+<% else %>
+  window.location.href = "<%= @introduction.url.tr('^', '') %>?no_intro=true";
+<% end %>

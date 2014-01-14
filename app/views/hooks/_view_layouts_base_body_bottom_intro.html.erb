@@ -1,47 +1,51 @@
 <script type="text/javascript">
   $(function() {
 
-    var intro_id = 0;
-    var next_url = "";
-    var next_step_id = 0;
+    <% if params[:no_intro] != 'true' %>
 
-    <% if params[:intro_id] %>
-      <% @intros = [Introduction.find(params[:intro_id])] %>
-    <% else %>
-      <% @intros = Introduction.active.not_disabled_by_user(User.current) %>
-    <% end %>
-    <% @intros.each do |intro| %>
+      var intro_id = 0;
+      var next_url = "";
+      var next_step_id = 0;
 
-    <!-- TODO User.current.pref.no_introductions == '0' &&  -->
-      <% if (!intro.users.include?(User.current) && (intro.url.blank? || request.fullpath =~ Regexp.new("#{intro.url}"))) || (params[:multipage] && params[:intro_step]) %>
-        <% previous_step = nil
-           params[:multipage] && params[:intro_step] ? started = false : started = true
-        %>
-
-        <% intro.introduction_steps.each do |step| %>
-
-          <% started = true if params[:intro_step] == step.id.to_param %>
-
-          <% if started %>
-
-            <% if step.url && !step.url.blank? && previous_step && step.url != previous_step.url %>
-              intro_id = <%= intro.id %>;
-              next_url = "<%= step.url %>";
-              next_step_id = <%= step.id %>;
-              <% break %>
-            <% else %>
-              setIntroParams("<%= escape_javascript(raw step.selector) %>", "<%= escape_javascript(raw step.text) %>", "<%= escape_javascript(raw step.position) %>", "<%= escape_javascript(raw step.step) %>");
-            <% end %>
-            <% previous_step = step %>
-          <% end %>
-        <% end %>
-        $(document).ready(function(){
-          $('#ajax-modal').html('<%= escape_javascript(render 'introductions/modal_do_not_show_again', :intro => intro) %>');
-        });
+      <% if params[:intro_id] %>
+        <% @intros = [Introduction.find(params[:intro_id])] %>
+      <% else %>
+        <% @intros = Introduction.active.not_disabled_by_user(User.current) %>
       <% end %>
-    <% end %>
+      <% @intros.each do |intro| %>
 
-    startIntroductions(intro_id, next_url, next_step_id);
+      <!-- TODO User.current.pref.no_introductions == '0' &&  -->
+        <% if (!intro.users.include?(User.current) && (intro.url.blank? || request.fullpath =~ Regexp.new("#{intro.url}"))) || (params[:multipage] && params[:intro_step]) %>
+          <% previous_step = nil
+             params[:multipage] && params[:intro_step] ? started = false : started = true
+          %>
+
+          <% intro.introduction_steps.each do |step| %>
+
+            <% started = true if params[:intro_step] == step.id.to_param %>
+
+            <% if started %>
+
+              <% if step.url && !step.url.blank? && previous_step && step.url != previous_step.url %>
+                intro_id = <%= intro.id %>;
+                next_url = "<%= step.url %>";
+                next_step_id = <%= step.id %>;
+                <% break %>
+              <% else %>
+                setIntroParams("<%= escape_javascript(raw step.selector) %>", "<%= escape_javascript(raw step.text) %>", "<%= escape_javascript(raw step.position) %>", "<%= escape_javascript(raw step.step) %>");
+              <% end %>
+              <% previous_step = step %>
+            <% end %>
+          <% end %>
+          $(document).ready(function(){
+            $('#ajax-modal').html('<%= escape_javascript(render 'introductions/modal_do_not_show_again', :intro => intro) %>');
+          });
+        <% end %>
+      <% end %>
+
+      startIntroductions(intro_id, next_url, next_step_id);
+
+    <% end %>
 
   });
 </script>
