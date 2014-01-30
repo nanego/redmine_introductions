@@ -51,7 +51,7 @@
       <% end %>
 
       if (nbIntros>0){
-        startIntroductions(intro_id, next_url, next_step_id, selectors);
+        startIntroductions('<%=escape_javascript(request.fullpath)%>', intro_id, next_url, next_step_id, selectors);
       }
 
     <% end %>

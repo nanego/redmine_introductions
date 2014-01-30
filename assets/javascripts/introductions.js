@@ -4,7 +4,7 @@ function setIntroParams(selector, text, position, step) {
   $(selector).attr('data-step', step);
 }
 
-function startIntroductions(intro_id, next_url, next_step_id, selectors) {
+function startIntroductions(first_url, intro_id, next_url, next_step_id, selectors) {
     if(validateSelectorsPresence(selectors)){
         if(next_url != ""){
             introJs().setOptions({ 'tooltipClass': "introJsTooltipClass",
@@ -16,7 +16,7 @@ function startIntroductions(intro_id, next_url, next_step_id, selectors) {
                 'prevLabel': '&larr;',
                 'nextLabel': 'Suivant &rarr;'
             }).start().oncomplete(function() {
-                    window.location.href = next_url + '?multipage=true&intro_id='+intro_id+'&intro_step=' + next_step_id;
+                    window.location.href = next_url + '?multipage=true&intro_id='+intro_id+'&intro_step=' + next_step_id + "&first_url=" + first_url;
                 }).onexit(function() {
                     show_modal_do_not_show_again();
                 });
@@ -65,7 +65,9 @@ function updateStepsPriorities() {
 }
 
 function show_modal_do_not_show_again() {
-    showModal("ajax-modal", "600px");
+    showModal("ajax-modal", "350px");
+    $('.ui-dialog-titlebar-close').hide();
+    $('.submitLink').focus().blur();
 }
 
 function validateSelectorsPresence(selectors) {

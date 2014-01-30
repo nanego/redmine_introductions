@@ -1,15 +1,15 @@
 <h3 class="title"><%= intro.name %></h3>
 
-<div class="container">
-  <%= l(:text_modal_do_not_show_again) %>
+<div class="container" style="margin-top: 18px;text-align: center;">
+  <%= link_to((image_tag("replay3.png", :plugin => 'redmine_introductions') + l("replay")), "#", :onclick=> "#{params[:first_url] ? "location.href=\'#{params[:first_url]}\';" : 'location.reload();'}", class: "btn-replay") %>
+  <%= link_to((image_tag("leave.png", :plugin => 'redmine_introductions') + l("quit")), "#", class: "btn-leave", :onclick => "closeModal('#{params[:first_url]}');") %>
 </div>
 
-<p class="buttons">
+<div style="text-align: center;margin-top: 18px;">
   <%= form_for :do_not_show_again, url: introductions_do_not_show_again_introduction_url(intro), method: :post, :remote => true do |f| %>
-    <%= f.submit l(:button_confirm_do_not_show_intro) %>
-    <%= submit_tag l(:button_show_intro_next_time), :name => nil, :onclick => "closeModal('#{intro.url.include?('.*') ? "" : intro.url.tr('^', '')}');", :type => 'button' %>
+    <%= f.submit l(:button_confirm_do_not_show_intro), class: "submitLink" %>
   <% end %>
-</p>
+</div>
 
 <script type="'text/javascript">
 
