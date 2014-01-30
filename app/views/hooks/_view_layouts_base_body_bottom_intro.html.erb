@@ -6,16 +6,22 @@
       var intro_id = 0;
       var next_url = "";
       var next_step_id = 0;
+      var selectors = [];
+      var nbIntros = 0;
 
       <% if params[:intro_id] %>
         <% @intros = [Introduction.find(params[:intro_id])] %>
       <% else %>
         <% @intros = Introduction.active.not_disabled_by_user(User.current) %>
       <% end %>
+
       <% @intros.each do |intro| %>
 
       <!-- TODO User.current.pref.no_introductions == '0' &&  -->
         <% if (!intro.users.include?(User.current) && (intro.url.blank? || request.fullpath =~ Regexp.new("#{intro.url}"))) || (params[:multipage] && params[:intro_step]) %>
+
+          nbIntros++;
+
           <% previous_step = nil
              params[:multipage] && params[:intro_step] ? started = false : started = true
           %>
@@ -33,6 +39,7 @@
                 <% break %>
               <% else %>
                 setIntroParams("<%= escape_javascript(raw step.selector) %>", "<%= escape_javascript(raw step.text) %>", "<%= escape_javascript(raw step.position) %>", "<%= escape_javascript(raw step.step) %>");
+                selectors.push("<%= escape_javascript(raw step.selector) %>");
               <% end %>
               <% previous_step = step %>
             <% end %>
@@ -43,7 +50,9 @@
         <% end %>
       <% end %>
 
-      startIntroductions(intro_id, next_url, next_step_id);
+      if (nbIntros>0){
+        startIntroductions(intro_id, next_url, next_step_id, selectors);
+      }
 
     <% end %>
 
