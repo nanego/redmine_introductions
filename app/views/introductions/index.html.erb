@@ -36,7 +36,7 @@
         <tr class="<%= cycle("odd", "even") %> introduction">
           <td style="text-align: center;width: 10px;"><%= link_to introduction.id, edit_introduction_path(introduction) %></td>
           <td><%= link_to introduction.name, edit_introduction_path(introduction) %></td>
-          <td><%= link_to introduction.url, link_to_intro_test(introduction) %></td>
+          <td><%= link_to introduction.url, link_to_intro_test(introduction), target: "_blank" %></td>
           <td><%= introduction.start_at %></td>
           <td><%= introduction.stop_at %></td>
           <td class="buttons">

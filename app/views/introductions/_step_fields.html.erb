@@ -13,7 +13,7 @@
   <%= f.hidden_field :step, :size => 10, :disabled => false, :required => false, :class => "order_step" %>
   <p>
     <%= f.label l('text') %>
-    <%= f.text_field :text, :size => 70, :disabled => false, :required => false %>
+    <%= f.text_area :text, :size => 70, :disabled => false, :required => false, :class => "introduction_step_text", :placeholder=> l("step_text_hint") %>
   </p>
   <p>
     <%= f.label l('selector') %>
@@ -24,7 +24,13 @@
     <%= f.select :position, Introduction::POSITIONS, :disabled => false, :required => false, :selected => f.object.position %>
   </p>
 
-  <p>
+  <p class="new_url_checkbox" data-new-url-checkbox-id="<%= f.object.object_id %>" >
+    <%= f.label l('change_url') %>
+    <%= check_box_tag "new_url_checkbox", l('general_text_Yes'), !f.object.url.blank? %>
+    <!-- <span class="hint"> <%= l('general_text_Yes') %> </span> -->
+  </p>
+
+  <p id="new_url_<%= f.object.object_id %>" style="display: <%= f.object.url.blank? ? 'none' : 'block' %>">
     <%= f.label :url %>
     <%= f.text_field :url, :size => 50, :disabled => false, :required => false %>
     <span class="hint"> <%= l('hint_url_no_regexp') %> </span>

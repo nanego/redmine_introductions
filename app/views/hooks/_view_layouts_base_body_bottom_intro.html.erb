@@ -17,8 +17,7 @@
 
       <% @intros.each do |intro| %>
 
-      <!-- TODO User.current.pref.no_introductions == '0' &&  -->
-        <% if (!intro.users.include?(User.current) && (intro.url.blank? || request.fullpath =~ Regexp.new("#{intro.url}"))) || (params[:multipage] && params[:intro_step]) %>
+        <% if ((User.current.pref[:no_introductions] == "0") && !intro.users.include?(User.current) && (intro.url.blank? || request.fullpath =~ Regexp.new("#{intro.url}"))) || (params[:multipage] && params[:intro_step]) %>
 
           nbIntros++;
 

@@ -52,6 +52,10 @@ jQuery(function() {
         updateStepsPriorities();
         return event.preventDefault();
     });
+    $('#introduction_form').on('click', '#new_url_checkbox', function(event){
+       id = $(this).closest("p").attr("data-new-url-checkbox-id");
+       $('#new_url_'+id).toggle();
+    });
 });
 
 function updateStepsPriorities() {

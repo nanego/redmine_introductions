@@ -31,4 +31,7 @@ fr:
   button_show_intro_next_time: "Continuer à afficher la présentation"
   text_modal_do_not_show_again: "Lors de votre prochaine visite :"
   replay: "Rejouer"
-  quit: "Quitter"
+  quit: "Fermer"
+  test_url: "URL de test"
+  step_text_hint: "Texte à afficher pour cette étape. Possibilité d'utiliser du code HTML"
+  change_url: "Changement de page ?"

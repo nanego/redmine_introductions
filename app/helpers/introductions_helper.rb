@@ -10,11 +10,7 @@ module IntroductionsHelper
   end
 
   def link_to_intro_test(introduction)
-    "#{request.protocol}#{request.host_with_port}#{introduction.url.tr('^', '')}?intro_id=#{introduction.id}"
-  end
-
-  def intro_url_without_regexp(introduction)
-    "#{introduction.url.tr('^', '')}"
+    "#{request.protocol}#{request.host_with_port}#{introduction.test_url}?intro_id=#{introduction.id}"
   end
 
 end

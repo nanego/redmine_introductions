@@ -28,6 +28,12 @@
         <%= f.text_field :stop_at, :size => 10, :disabled => false, :required => false %><%= calendar_for('introduction_stop_at') %>
       </p>
 
+      <p>
+        <%= f.label l('test_url') %>
+        <%= f.text_field :test_url, :size => 70, :disabled => false, :required => false %>
+        <%= l('hint_url_no_regexp') %>
+      </p>
+
       <ul id="sortable">
         <%= f.fields_for :introduction_steps do |builder| %>
           <%= render 'step_fields', f: builder %>

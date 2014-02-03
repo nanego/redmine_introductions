@@ -71,3 +71,8 @@ a.btn-replay:hover, a.btn-leave:hover {
     border: none;
     cursor: pointer;
 }
+
+#introduction_form .introduction_step_text{
+    height: 70px;
+    width: 618px;
+}

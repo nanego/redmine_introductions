@@ -6,7 +6,7 @@ class Introduction < ActiveRecord::Base
                l('left') =>'left',
                l('right') =>'right'}
 
-  attr_accessible :name, :url, :start_at, :stop_at, :introduction_steps_attributes
+  attr_accessible :name, :url, :start_at, :stop_at, :introduction_steps_attributes, :test_url
 
   validates_presence_of :name
 

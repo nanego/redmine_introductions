@@ -1,3 +1,4 @@
 = redmine_introductions
 
-Description goes here
+This redmine plugin add the ability to create better introductions for features with a step-by-step guide.
+It is based on the Intro.js project (http://usablica.github.io/intro.js/).
