@@ -17,7 +17,7 @@
 
       <% @intros.each do |intro| %>
 
-        <% if ((User.current.pref[:no_introductions] == "0") && !intro.users.include?(User.current) && (intro.url.blank? || request.fullpath =~ Regexp.new("#{intro.url}"))) || (params[:multipage] && params[:intro_step]) %>
+        <% if ((User.current.pref[:no_introductions] == nil || User.current.pref[:no_introductions] == "0") && !intro.users.include?(User.current) && (intro.url.blank? || request.fullpath =~ Regexp.new("#{intro.url}"))) || (params[:multipage] && params[:intro_step]) %>
 
           nbIntros++;
 
@@ -50,6 +50,13 @@
       <% end %>
 
       if (nbIntros>0){
+        <% locales = { "nextPage"=>l('nextPage'),
+                       "quit"=>l('quit'),
+                       "prevLabel"=>l('prevLabel'),
+                       "nextLabel"=>l('nextLabel')
+                     }
+         %>
+        window.I18n = <%= locales.to_json.html_safe %>
         startIntroductions('<%=escape_javascript(request.fullpath)%>', intro_id, next_url, next_step_id, selectors);
       }
 

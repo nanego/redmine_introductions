@@ -36,3 +36,6 @@ fr:
   test_url: "URL de test"
   step_text_hint: "Texte à afficher pour cette étape. Possibilité d'utiliser du code HTML"
   change_url: "Changement de page ?"
+  prevLabel: "&larr;"
+  nextLabel: 'Suivant &rarr;'
+  nextPage: 'Page suivante'

@@ -5,16 +5,17 @@ function setIntroParams(selector, text, position, step) {
 }
 
 function startIntroductions(first_url, intro_id, next_url, next_step_id, selectors) {
+
     if(validateSelectorsPresence(selectors)){
         if(next_url != ""){
             introJs().setOptions({ 'tooltipClass': "introJsTooltipClass",
                 'showStepNumbers': false,
                 'showButtons': true,
                 'showBullets':false,
-                'doneLabel': 'Page suivante',
-                'skipLabel': 'Passer',
-                'prevLabel': '&larr;',
-                'nextLabel': 'Suivant &rarr;'
+                'doneLabel': I18n.nextPage,
+                'skipLabel': I18n.quit,
+                'prevLabel': I18n.prevLabel,
+                'nextLabel': I18n.nextLabel
             }).start().oncomplete(function() {
                     window.location.href = next_url + '?multipage=true&intro_id='+intro_id+'&intro_step=' + next_step_id + "&first_url=" + first_url;
                 }).onexit(function() {
@@ -25,10 +26,10 @@ function startIntroductions(first_url, intro_id, next_url, next_step_id, selecto
                 'showStepNumbers': false,
                 'showButtons': true,
                 'showBullets':false,
-                'doneLabel': 'Fermer',
-                'skipLabel': 'Passer',
-                'prevLabel': '&larr;',
-                'nextLabel': 'Suivant &rarr;'
+                'doneLabel': I18n.quit,
+                'skipLabel': I18n.quit,
+                'prevLabel': I18n.prevLabel,
+                'nextLabel': I18n.nextLabel
             }).start().oncomplete(function() {
                     show_modal_do_not_show_again();
                 }).onexit(function() {
