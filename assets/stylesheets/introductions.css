@@ -111,3 +111,8 @@ a.introjs-quit{
     text-shadow: none;
     border: 1px solid #999999;
 }
+a.introjs-quit:hover {
+    border-color: #909090;
+    text-decoration: none;
+    box-shadow: 0px 1px 1px #dddddd;
+}
