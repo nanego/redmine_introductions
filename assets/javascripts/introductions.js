@@ -18,8 +18,6 @@ function startIntroductions(first_url, intro_id, next_url, next_step_id, selecto
                 'nextLabel': I18n.nextLabel
             }).start().oncomplete(function() {
                     window.location.href = next_url + '?multipage=true&intro_id='+intro_id+'&intro_step=' + next_step_id + "&first_url=" + first_url;
-                }).onexit(function() {
-                    show_modal_do_not_show_again();
                 });
         }else{
             introJs().setOptions({ 'tooltipClass': "introJsTooltipClass",
@@ -30,11 +28,7 @@ function startIntroductions(first_url, intro_id, next_url, next_step_id, selecto
                 'skipLabel': I18n.quit,
                 'prevLabel': I18n.prevLabel,
                 'nextLabel': I18n.nextLabel
-            }).start().oncomplete(function() {
-                    show_modal_do_not_show_again();
-                }).onexit(function() {
-                    show_modal_do_not_show_again();
-                });
+            }).start();
         }
     }
 }
@@ -67,12 +61,6 @@ function updateStepsPriorities() {
         $(this).find('.label_step_priority').html(i);
         i++;
     });
-}
-
-function show_modal_do_not_show_again() {
-    showModal("ajax-modal", "350px");
-    $('.ui-dialog-titlebar-close').hide();
-    $('.submitLink').focus().blur();
 }
 
 function validateSelectorsPresence(selectors) {

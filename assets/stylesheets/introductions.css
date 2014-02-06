@@ -76,3 +76,38 @@ a.btn-replay:hover, a.btn-leave:hover {
     height: 70px;
     width: 618px;
 }
+
+.introjs-skipbutton {
+    background: transparent;
+    text-shadow: none;
+    border: none;
+    border-radius: 0;
+}
+.introjs-skipbutton:hover,
+.introjs-skipbutton:focus,
+.introjs-skipbutton:active {
+    border-color: transparent;
+    text-decoration: underline;
+    box-shadow: none;
+    background: transparent;
+}
+
+.introjs-replay {
+    margin-right: 5px;
+    /* font: 12px/normal sans-serif; */
+    /* padding: 0 0.8em 0.1em 0.8em; */
+}
+.introjs-replay img{
+    margin-bottom: -1px;
+    margin-right: 5px;
+}
+a.introjs-quit{
+    background-color: #9CC90E;
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#9CC90E), to(#79B51C));
+    background-image: -moz-linear-gradient(#9CC90E, #79B51C);
+    background-image: -o-linear-gradient(#9CC90E, #79B51C);
+    background-image: linear-gradient(#9CC90E, #79B51C);
+    color: white;
+    text-shadow: none;
+    border: 1px solid #999999;
+}

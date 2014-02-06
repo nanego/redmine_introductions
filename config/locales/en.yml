@@ -27,9 +27,13 @@ en:
   right: "Right"
   button_confirm: "Apply"
   field_no_introductions: "Do not show new introductions"
-  button_confirm_do_not_show_intro: "Do not show anymore this introduction"
-  button_show_intro_next_time: "Show again this introduction"
-  text_modal_do_not_show_again: "Next time:"
+  button_confirm_do_not_show_intro: "Do not show anymore"
   replay: "Play again"
   quit: "Exit"
   cancel: "Cancel"
+  test_url: "test URL"
+  step_text_hint: "Text for this step (HTML compatible)"
+  change_url: "Different URL?"
+  prevLabel: "&larr;"
+  nextLabel: 'Next &rarr;'
+  nextPage: 'Next page'

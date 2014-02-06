@@ -7,4 +7,6 @@ class IntroductionStep < ActiveRecord::Base
 
   default_scope order('step ASC')
 
+  scope :last, order("step desc").limit(1)
+
 end
