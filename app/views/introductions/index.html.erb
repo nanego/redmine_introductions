@@ -51,3 +51,18 @@
   </div>
 
 <% end %>
+
+<ul>
+  <% if !@intros_users.empty? %>
+    <h3 style="margin-top: 40px;">Dernières vues</h3>
+    <% @intros_users.each do |intro_user| %>
+      <li>
+        <%= "#{intro_user.user.name} -> ##{intro_user.id} #{intro_user.introduction.name} (#{intro_user.last_view.to_s(:short)})" %>
+        <%= form_for :show_again, url: introductions_show_again_introduction_url(intro_user.introduction), method: :post do |f| %>
+          <%= hidden_field_tag :user_id, intro_user.user.id %>
+          <%= f.submit "Réactiver", class: 'introjs-button introjs-replay introjs-quit' %>
+        <% end %>
+      </li>
+    <% end %>
+  <% end %>
+</ul>

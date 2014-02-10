@@ -1,5 +1,5 @@
-<% if @first_url %>
-  window.location.href = "<%= @first_url %>?no_intro=true";
+<% if !params[:first_url].blank? %>
+  window.location.href = "<%= params[:first_url] %>?no_intro=true";
 <% else %>
   introJs().exit();
 <% end %>

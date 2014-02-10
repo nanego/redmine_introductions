@@ -17,7 +17,9 @@
 
       <% @intros.each do |intro| %>
 
-        <% if ((User.current.pref[:no_introductions] == nil || User.current.pref[:no_introductions] == "0") && !intro.users.include?(User.current) && (intro.url.blank? || request.fullpath =~ Regexp.new("#{intro.url}"))) || (params[:multipage] && params[:intro_step]) %>
+        <% lastView = IntroductionsUser.find_by_introduction_id_and_user_id(intro.id, User.current.id) %>
+
+        <% if ((User.current.pref[:no_introductions] == nil || User.current.pref[:no_introductions] == "0") && (lastView == nil || lastView.blocked == false && lastView.last_view < Time.now - 1.day) && (intro.url.blank? || request.fullpath =~ Regexp.new("#{intro.url}"))) || (params[:multipage] && params[:intro_step]) %>
 
           nbIntros++;
 
@@ -37,19 +39,20 @@
                 next_step_id = <%= step.id %>;
                 <% break %>
               <% else %>
-                <% # add links to the last step
-                  if step == intro.introduction_steps.last
+                <% if step == intro.introduction_steps.last # add links to the last step
                     step.text << "
-                    <div class='container' style='margin-top: 10px;margin-bottom: 3px;text-align: center;'>
-                        #{ form_for :do_not_show_again, url: introductions_do_not_show_again_introduction_url(intro), method: :post, :remote => true do |f|
-                             f.submit l(:button_confirm_do_not_show_intro), class: 'introjs-skipbutton'
-                           end }
-                        #{ link_to((image_tag('video-control-replay.png', :plugin => 'redmine_introductions') + l('replay')), '#', :onclick=> "#{params[:first_url] ? "location.href=\'#{params[:first_url]}\';" : 'location.reload();'}", class: 'introjs-button introjs-replay') }
-                        #{ link_to(l("quit"), "#", class: 'introjs-button introjs-replay introjs-quit', :href => "#{params[:first_url] ? params[:first_url] + '?no_intro=true' : 'javascript:void(0);'}", :onclick=> "introJs().exit();") }
-                    </div>"
+                      <div class='container' style='margin-top: 10px;margin-bottom: 3px;text-align: center;'>
+                          #{ form_for :do_not_show_again, url: introductions_do_not_show_again_introduction_url(intro), method: :post, :remote => true do |f|
+                               f.submit l(:button_confirm_do_not_show_intro), class: 'introjs-skipbutton alwaysSkip'
+                             end }
+                          #{ link_to((image_tag('video-control-replay.png', :plugin => 'redmine_introductions') + l('replay')), '#', :onclick=> "#{params[:first_url] ? "location.href=\'#{params[:first_url]}\';" : 'location.reload();'}", class: 'introjs-button introjs-replay') }
 
-                  end
-                %>
+                          #{ form_for :update_last_view_date, url: introductions_update_last_view_date_introduction_url(intro), method: :post, :remote => true do |f|
+                               f.submit l("quit"), class: 'introjs-button introjs-replay introjs-quit'
+                             end }
+                      </div>"
+                    @lastPage = true
+                  end %>
                 setIntroParams("<%= escape_javascript(raw step.selector) %>", "<%= escape_javascript(raw step.text) %>", "<%= escape_javascript(raw step.position) %>", "<%= escape_javascript(raw step.step) %>");
                 selectors.push("<%= escape_javascript(raw step.selector) %>");
               <% end %>
@@ -70,8 +73,10 @@
                        "prevLabel"=>l('prevLabel'),
                        "nextLabel"=>l('nextLabel')
                      }
+           customParams = { "lastPage"=> @lastPage||false}
          %>
         window.I18n = <%= locales.to_json.html_safe %>
+        window.customParams = <%= customParams.to_json.html_safe %>
         startIntroductions('<%=escape_javascript(request.fullpath)%>', intro_id, next_url, next_step_id, selectors);
       }
 

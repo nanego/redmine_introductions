@@ -12,7 +12,9 @@ class Introduction < ActiveRecord::Base
 
   has_many :introduction_steps, :dependent => :destroy
   accepts_nested_attributes_for :introduction_steps, :reject_if => lambda { |a| a[:text].blank? }, :allow_destroy => true
-  has_and_belongs_to_many :users
+
+  has_many :introductions_users
+  has_many :users, through: :introductions_users
 
   scope :active, where("(start_at = NULL OR start_at <= ?) AND (stop_at = NULL OR stop_at >= ?)", DateTime.now, DateTime.now )
 

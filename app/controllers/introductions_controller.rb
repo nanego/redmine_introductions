@@ -3,6 +3,7 @@ class IntroductionsController < ApplicationController
 
   def index
     @introductions = Introduction.order("id asc").all
+    @intros_users = IntroductionsUser.where("last_view > ? OR blocked=true", Time.now-1.day).order("last_view desc").all
     render :layout => 'admin'
   end
 
@@ -58,11 +59,24 @@ class IntroductionsController < ApplicationController
   end
 
   def do_not_show_again
-    @introduction = Introduction.find(params[:id])
-    unless @introduction.users.include?(User.current)
-      @introduction.users << User.current
-      @introduction.save!
-    end
+    @intro_user = IntroductionsUser.find_or_create_by_introduction_id_and_user_id(params[:id].to_i, User.current.id)
+    @intro_user.blocked = true
+    @intro_user.last_view = Time.now
+    @intro_user.save!
+  end
+
+  def show_again
+    @intro_user = IntroductionsUser.find_by_introduction_id_and_user_id(params[:id], params[:user_id])
+    @intro_user.destroy if @intro_user
+    redirect_to action: :index
+  end
+
+  def update_last_view_date
+    @intro_user = IntroductionsUser.find_or_create_by_introduction_id_and_user_id(params[:id].to_i, User.current.id)
+    @intro_user.blocked = false
+    @intro_user.last_view = Time.now
+    @intro_user.save!
+    render action: "do_not_show_again"
   end
 
 end
