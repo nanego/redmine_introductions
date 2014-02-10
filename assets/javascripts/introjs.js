@@ -585,7 +585,7 @@
     }
 
     if (this._currentStep == 0) {
-      if(customParams.lastPage==true){
+      if(customParams.lastPage==true && this._introItems.length - 1 == this._currentStep){
         $('.introjs-tooltipbuttons').hide();
       }else{
         $('.introjs-tooltipbuttons').show();
