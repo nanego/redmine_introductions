@@ -3,7 +3,6 @@ class IntroductionsController < ApplicationController
 
   def index
     @introductions = Introduction.order("id asc").all
-    @intros_users = IntroductionsUser.where("last_view > ? OR blocked=true", Time.now-1.day).order("last_view desc").all
     render :layout => 'admin'
   end
 
@@ -32,6 +31,7 @@ class IntroductionsController < ApplicationController
 
   def edit
     @introduction = Introduction.find(params[:id])
+    @intros_users = @introduction.introductions_users.where("last_view > ? OR blocked=true", Time.now-1.day).order("last_view desc").all
   end
 
   def update

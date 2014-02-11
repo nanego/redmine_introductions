@@ -1,3 +1,20 @@
 <h2><%= l('edit_introduction') %></h2>
 
 <%= render 'form' %>
+
+<ul>
+  <% if !@intros_users.empty? %>
+    <h3 style="margin-top: 40px;">Utilisateurs ayant caché cette présentation :</h3>
+    <% @intros_users.each do |intro_user| %>
+      <li>
+        <%= "#{intro_user.user.name}, le #{intro_user.last_view.to_s(:short)}" %>
+        <%= form_for :show_again, url: introductions_show_again_introduction_url(intro_user.introduction), method: :post do |f| %>
+          <%= hidden_field_tag :user_id, intro_user.user.id %>
+          <%= f.submit "Réactiver", class: 'introjs-button introjs-replay introjs-quit' %>
+        <% end %>
+      </li>
+    <% end %>
+  <% else %>
+    <h3 style="margin-top: 40px;">Aucun utilisateurs n'a caché cette présentation.</h3>
+  <% end %>
+</ul>
