@@ -1,16 +1,21 @@
 one:
   id: 1
-  author_id: 1
-  project_id: 1
-  status_id: 1
-  subject: "Template sample title"
-  tracker_id: 1
-  template_title: "Template title"
+  name: "John Uno"
+  url: "/projects"
+  start_at: 2007-02-12 15:08:27 +01:00
+  stop_at: 2017-02-12 15:08:27 +01:00
+  test_url: "/projects"
 two:
   id: 2
-  author_id: 1
-  project_id: 1
-  status_id: 1
-  subject: "Second sample"
-  tracker_id: 3
-  template_title: "Template title"
+  name: "John Doe"
+  url: "/projects"
+  start_at: 2007-02-12 15:08:27 +01:00
+  stop_at: 2017-02-12 15:08:27 +01:00
+  test_url: "/projects"
+three:
+  id: 3
+  name: "John Tros"
+  url: "/projects"
+  start_at: 2007-02-12 15:08:27 +01:00
+  stop_at: 2017-02-12 15:08:27 +01:00
+  test_url: "/projects"

@@ -1,0 +1,16 @@
+one:
+  id: 1
+  introduction_id: 1
+  step: 1
+  text: "First step"
+  position: "left"
+  selector: ".edit-action"
+  url: ""
+two:
+  id: 2
+  introduction_id: 1
+  step: 2
+  text: "Second step"
+  position: "bottom"
+  selector: ".edit-form"
+  url: ""
