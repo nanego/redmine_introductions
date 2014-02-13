@@ -42,16 +42,16 @@
                 <% if step == intro.introduction_steps.last # add links to the last step
                     step.text << "
                       <div>
-                        <div style='margin-top: 12px;margin-bottom: 3px;float:left;'>
+                        <div class='skipbutton_container'>
                             #{ form_for :do_not_show_again, url: introductions_do_not_show_again_introduction_url(intro), method: :post, :remote => true do |f|
                                  f.submit l(:button_confirm_do_not_show_intro), class: 'introjs-skipbutton alwaysSkip'
                                end }
                         </div>
-                        <div style='margin-top: 10px;margin-bottom: 3px;float:right;'>
+                        <div class='closebutton_container'>
                             #{ link_to((image_tag('video-control-replay.png', :plugin => 'redmine_introductions') + l('replay')), '#', :onclick=> "#{params[:first_url] ? "location.href=\'#{params[:first_url]}\';" : 'location.reload();'}", class: 'introjs-button introjs-replay') if intro.introduction_steps.size>1}
 
                             #{ form_for :update_last_view_date, url: introductions_update_last_view_date_introduction_url(intro), method: :post, :remote => true do |f|
-                                 f.submit l("quit"), class: 'introjs-button introjs-replay introjs-quit'
+                                 f.submit l("quit"), class: 'introjs-button introjs-quit'
                                end }
                         </div>
                       </div>"
