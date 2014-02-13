@@ -27,7 +27,7 @@ fr:
   right: "Droite"
   button_confirm: "Confirmer"
   field_no_introductions: "Ne pas afficher les présentations des nouvelles fonctionnalités"
-  button_confirm_do_not_show_intro: "Ne plus\r\nafficher"
+  button_confirm_do_not_show_intro: "Ne plus afficher"
   replay: "Rejouer"
   quit: "Fermer"
   cancel: "Abandonner"

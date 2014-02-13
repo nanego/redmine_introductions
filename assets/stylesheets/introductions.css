@@ -95,15 +95,14 @@ a.btn-replay:hover, a.btn-leave:hover {
 }
 
 .introjs-skipbutton.alwaysSkip{
-    max-width: 55px;
+    /* max-width: 55px; */
     font-size: 10px;
     padding: 0 4px 0 0;
 }
 
 .introjs-replay {
     margin-right: 5px;
-    /* font: 12px/normal sans-serif; */
-    /* padding: 0 0.8em 0.1em 0.8em; */
+    margin-top: 0px;
 }
 .introjs-replay img{
     margin-bottom: -1px;

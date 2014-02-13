@@ -41,15 +41,19 @@
               <% else %>
                 <% if step == intro.introduction_steps.last # add links to the last step
                     step.text << "
-                      <div class='container' style='margin-top: 10px;margin-bottom: 3px;text-align: center;'>
-                          #{ form_for :do_not_show_again, url: introductions_do_not_show_again_introduction_url(intro), method: :post, :remote => true do |f|
-                               f.submit l(:button_confirm_do_not_show_intro), class: 'introjs-skipbutton alwaysSkip'
-                             end }
-                          #{ link_to((image_tag('video-control-replay.png', :plugin => 'redmine_introductions') + l('replay')), '#', :onclick=> "#{params[:first_url] ? "location.href=\'#{params[:first_url]}\';" : 'location.reload();'}", class: 'introjs-button introjs-replay') }
+                      <div>
+                        <div style='margin-top: 12px;margin-bottom: 3px;float:left;'>
+                            #{ form_for :do_not_show_again, url: introductions_do_not_show_again_introduction_url(intro), method: :post, :remote => true do |f|
+                                 f.submit l(:button_confirm_do_not_show_intro), class: 'introjs-skipbutton alwaysSkip'
+                               end }
+                        </div>
+                        <div style='margin-top: 10px;margin-bottom: 3px;float:right;'>
+                            #{ link_to((image_tag('video-control-replay.png', :plugin => 'redmine_introductions') + l('replay')), '#', :onclick=> "#{params[:first_url] ? "location.href=\'#{params[:first_url]}\';" : 'location.reload();'}", class: 'introjs-button introjs-replay') if intro.introduction_steps.size>1}
 
-                          #{ form_for :update_last_view_date, url: introductions_update_last_view_date_introduction_url(intro), method: :post, :remote => true do |f|
-                               f.submit l("quit"), class: 'introjs-button introjs-replay introjs-quit'
-                             end }
+                            #{ form_for :update_last_view_date, url: introductions_update_last_view_date_introduction_url(intro), method: :post, :remote => true do |f|
+                                 f.submit l("quit"), class: 'introjs-button introjs-replay introjs-quit'
+                               end }
+                        </div>
                       </div>"
                     @lastPage = true
                   end %>
