@@ -37,3 +37,6 @@ fr:
   prevLabel: "&larr;"
   nextLabel: 'Suivant &rarr;'
   nextPage: 'Page suivante'
+  they_hid_it: "Utilisateurs ayant caché cette présentation :"
+  nobody_has_hidden_it: "Aucun utilisateurs n'a caché cette présentation."
+  reactivate: "Réactiver"

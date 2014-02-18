@@ -37,3 +37,6 @@ en:
   prevLabel: "&larr;"
   nextLabel: 'Next &rarr;'
   nextPage: 'Next page'
+  they_hid_it: "This introduction is disabled fro these users :"
+  nobody_has_hidden_it: "This introduction has not been hidden by anybody."
+  reactivate: "Reactivate"

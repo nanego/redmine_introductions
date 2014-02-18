@@ -68,7 +68,9 @@ class IntroductionsController < ApplicationController
   def show_again
     @intro_user = IntroductionsUser.find_by_introduction_id_and_user_id(params[:introduction_id], params[:user_id])
     @intro_user.destroy if @intro_user
-    redirect_to action: :index
+
+    @introduction = Introduction.find(params[:introduction_id])
+    @intros_users = @introduction.introductions_users.where("last_view > ? OR blocked=true", Time.now-1.day).order("last_view desc").all
   end
 
   def update_last_view_date
