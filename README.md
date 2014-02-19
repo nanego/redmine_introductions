@@ -1,7 +1,7 @@
 Redmine Introductions plugin
 ======================
 
-This redmine plugin add the ability to create better introductions for features with a step-by-step guide.
+This redmine plugin add the ability to display introductions for features and to create step-by-step users guide.
 
 It is based on the Intro.js project (http://usablica.github.io/intro.js/).
 
