@@ -31,7 +31,7 @@ class IntroductionsController < ApplicationController
 
   def edit
     @introduction = Introduction.find(params[:id])
-    @intros_users = @introduction.introductions_users.where("last_view > ? OR blocked=true", Time.now-1.day).order("last_view desc").all
+    @intros_users = @introduction.introductions_users.where("last_view > ? OR blocked=#{Introduction.connection.quoted_true}", Time.now-1.day).order("last_view desc").all
   end
 
   def update
@@ -70,7 +70,7 @@ class IntroductionsController < ApplicationController
     @intro_user.destroy if @intro_user
 
     @introduction = Introduction.find(params[:introduction_id])
-    @intros_users = @introduction.introductions_users.where("last_view > ? OR blocked=true", Time.now-1.day).order("last_view desc").all
+    @intros_users = @introduction.introductions_users.where("last_view > ? OR blocked=#{Introduction.connection.quoted_true}", Time.now-1.day).order("last_view desc").all
   end
 
   def update_last_view_date
