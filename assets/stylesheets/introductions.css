@@ -133,3 +133,7 @@ a.btn-replay:hover, a.btn-leave:hover {
 .closebutton_container{
     margin-top: 10px;margin-bottom: 3px;float:right;
 }
+
+.permanent_tag{
+    color: darkgrey;
+}

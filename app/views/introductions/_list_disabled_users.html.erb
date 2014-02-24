@@ -3,7 +3,8 @@
     <h3 style="margin-top: 40px;"><%= t("they_hid_it") %></h3>
     <% @intros_users.each do |intro_user| %>
       <li>
-        <%= "#{intro_user.user.name}, le #{intro_user.last_view.to_s(:short)}" %>
+        <%= "#{intro_user.user.name}, #{intro_user.last_view.to_s(:short)}" %>
+        <%= content_tag :span, "[#{l("intro_permanently_blocked")}]", class: "permanent_tag" if intro_user.blocked? %>
         <%= form_for :show_again, url: introduction_show_again_path(intro_user.introduction), remote: true, method: :post do |f| %>
           <%= hidden_field_tag :user_id, intro_user.user.id %>
           <%= f.submit t("reactivate"), class: 'introjs-button introjs-replay introjs-quit' %>
