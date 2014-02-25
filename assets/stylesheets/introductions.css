@@ -103,6 +103,7 @@ a.btn-replay:hover, a.btn-leave:hover {
 .introjs-replay {
     margin-right: 5px;
     margin-top: 0px;
+    padding: 0.3em 0.5em;
 }
 .introjs-replay img{
     margin-bottom: -1px;
@@ -128,6 +129,7 @@ a.btn-replay:hover, a.btn-leave:hover {
 }
 
 .skipbutton_container{
+    clear: both;
     margin-top: 5px;margin-bottom: 0;float:right;
 }
 
