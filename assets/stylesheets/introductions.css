@@ -175,6 +175,7 @@ a.btn-replay:hover, a.btn-leave:hover {
 
 .reactivate_users.three_columns li {
     display: inline-block;
+    width: 100%;
 }
 
 .introjs-button.reactivate_btn{
