@@ -30,6 +30,7 @@ fr:
   button_confirm_do_not_show_intro: "Ne plus jamais afficher"
   replay: "Rejouer"
   quit: "Fermer"
+  quit_tooltip: "ne plus afficher aujourd'hui"
   replay_later: "Fermer"
   cancel: "Abandonner"
   test_url: "URL de test"

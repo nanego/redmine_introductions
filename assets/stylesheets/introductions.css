@@ -160,8 +160,8 @@ a.btn-replay:hover, a.btn-leave:hover {
 }
 
 .tooltipDelayIntro{
-  background-color: transparent;
-  color: darkgrey;
+  background-color: darkgrey;
+  color: white;
   font-size: 10px;
   padding: 5px;
   float: left;

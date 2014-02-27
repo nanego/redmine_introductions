@@ -378,12 +378,14 @@
       // Custom for redmine plugin
       $('#introjs-quitButton').hover(
           function() {
-              $('.tooltipDelayIntro').show();
+              $('#introjs-quitButton').val("Fermer (ne plus afficher aujourd'hui)");
+              // $('.tooltipDelayIntro').show();
               $('.introjs-alwaysSkipButton.alwaysSkip').hide();
               $('.introjs-replay').hide();
               $('.introjs-tooltipbuttons').hide();
           }, function() {
-              $('.tooltipDelayIntro').hide();
+              $('#introjs-quitButton').val("Fermer");
+              // $('.tooltipDelayIntro').hide();
               $('.introjs-alwaysSkipButton.alwaysSkip').show();
               $('.introjs-replay').show();
               $('.introjs-tooltipbuttons').show();
