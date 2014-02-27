@@ -37,7 +37,7 @@ jQuery(function() {
     $('#introduction_form').on('click', '.remove_fields', function(event) {
         $(this).prev('input[type=hidden]').val('1');
         $(this).closest('li').hide();
-        return event.preventDefault();
+        // return event.preventDefault();
     });
     $('#introduction_form').on('click', '.add_fields', function(event) {
         var regexp, time;
@@ -45,7 +45,7 @@ jQuery(function() {
         regexp = new RegExp($(this).data('id'), 'g');
         $(this).before($(this).data('fields').replace(regexp, time));
         updateStepsPriorities();
-        return event.preventDefault();
+        // return event.preventDefault();
     });
     $('#introduction_form').on('click', '#new_url_checkbox', function(event){
        id = $(this).closest("p").attr("data-new-url-checkbox-id");
