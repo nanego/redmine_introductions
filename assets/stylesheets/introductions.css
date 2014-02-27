@@ -160,9 +160,23 @@ a.btn-replay:hover, a.btn-leave:hover {
 }
 
 .tooltipDelayIntro{
-  background-color: darkgrey;
-  color: white;
+  background-color: #f0f0f0;
+  color: darkgrey;
   font-size: 10px;
   padding: 5px;
   float: left;
+}
+
+.reactivate_users.three_columns {
+    -webkit-columns: 3;
+    -moz-columns: 3;
+    columns: 3;
+}
+
+.reactivate_users.three_columns li {
+    display: inline-block;
+}
+
+.introjs-button.reactivate_btn{
+    margin: 5px 0 7px 0;
 }

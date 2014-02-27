@@ -1,16 +1,22 @@
 <ul>
   <% if !@intros_users.empty? %>
     <h3 style="margin-top: 40px;"><%= t("they_hid_it") %></h3>
-    <% @intros_users.each do |intro_user| %>
-      <li>
-        <%= "#{intro_user.user.name}, #{intro_user.last_view.to_s(:short)}" %>
-        <%= content_tag :span, "[#{l("intro_permanently_blocked")}]", class: "permanent_tag" if intro_user.blocked? %>
-        <%= form_for :show_again, url: introduction_show_again_path(intro_user.introduction), remote: true, method: :post do |f| %>
-          <%= hidden_field_tag :user_id, intro_user.user.id %>
-          <%= f.submit t("reactivate"), class: 'introjs-button' %>
-        <% end %>
-      </li>
-    <% end %>
+    <div class="reactivate_users three_columns">
+      <% @intros_users.each do |intro_user| %>
+        <li>
+
+          <%= form_for :show_again, url: introduction_show_again_path(intro_user.introduction), remote: true, method: :post do |f| %>
+            <%= hidden_field_tag :user_id, intro_user.user.id %>
+            <%= f.submit t("reactivate"), class: 'introjs-button reactivate_btn' %>
+          <% end %>
+
+          <%= intro_user.last_view.to_s(:short) %>
+          <%= link_to intro_user.user.name, user_path(intro_user.user) %>
+          <%= content_tag :span, "[#{l("intro_permanently_blocked")}]", class: "permanent_tag" if intro_user.blocked? %>
+
+        </li>
+      <% end %>
+    </div>
   <% else %>
     <h3 style="margin-top: 40px;"><%= t("nobody_has_hidden_it") %></h3>
   <% end %>
