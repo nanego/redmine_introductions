@@ -39,20 +39,22 @@
                 next_step_id = <%= step.id %>;
                 <% break %>
               <% else %>
-                <% if step == intro.introduction_steps.last # add links to the last step
+                <% if true # step == intro.introduction_steps.last # add links to the last step
+                   # image_tag('video-control-replay.png', :plugin => 'redmine_introductions') +
                     step.text << "
                       <div>
-                        <div class='closebutton_container'>
-                            #{ link_to((image_tag('video-control-replay.png', :plugin => 'redmine_introductions') + l('replay')), '#', :onclick=> "#{params[:first_url] ? "location.href=\'#{params[:first_url]}\';" : 'location.reload();'}", class: 'introjs-button introjs-replay') if intro.introduction_steps.size>1}
-
-                            #{ form_for :update_last_view_date, url: introduction_update_last_view_date_path(intro), method: :post, :remote => true do |f|
-                                 f.submit l("replay_later"), class: 'introjs-button introjs-quit'
-                               end }
+                        <div class='replay_button_container'>
+                          #{link_to(l('replay'), '#', :onclick=> "#{params[:first_url] ? "location.href=\'#{params[:first_url]}\';" : 'location.reload();'}", class: 'introjs-button introjs-replay') if intro.introduction_steps.size > 1 && step == intro.introduction_steps.last }
                         </div>
-                        <div class='skipbutton_container'>
-                            #{ form_for :do_not_show_again, url: introduction_do_not_show_again_path(intro), method: :post, :remote => true do |f|
-                                 f.submit l(:button_confirm_do_not_show_intro), class: 'introjs-skipbutton alwaysSkip'
-                               end }
+                        <!-- end -->
+                        <div class='skipbutton_container_left'>
+                          #{ form_for :update_last_view_date, url: introduction_update_last_view_date_path(intro), method: :post, :remote => true do |f|
+                               f.submit l("replay_later"), class: 'introjs-button introjs-quit', id: "introjs-quitButton"
+                             end }
+                          #{ content_tag :div, "et ne plus afficher aujourd'hui", class: "tooltipDelayIntro", style: "display: none;" }
+                          #{ form_for :do_not_show_again, url: introduction_do_not_show_again_path(intro), method: :post, :remote => true do |f|
+                               f.submit l(:button_confirm_do_not_show_intro), class: 'introjs-alwaysSkipButton alwaysSkip'
+                             end }
                         </div>
                       </div>"
                     @lastPage = true
@@ -63,11 +65,6 @@
               <% previous_step = step %>
             <% end %>
           <% end %>
-          /*
-          $(document).ready(function(){
-            $('#ajax-modal').html('<%= escape_javascript(render 'introductions/modal_do_not_show_again', :intro => intro) %>');
-          });
-          */
         <% end %>
       <% end %>
 
@@ -82,6 +79,23 @@
         window.I18n = <%= locales.to_json.html_safe %>
         window.customParams = <%= customParams.to_json.html_safe %>
         startIntroductions('<%=escape_javascript(request.fullpath)%>', intro_id, next_url, next_step_id, selectors);
+
+        /*
+        $('#introjs-quitButton').hover(
+            function() {
+              $('.tooltipDelayIntro').show();
+              $('.introjs-alwaysSkipButton.alwaysSkip').hide();
+              $('.introjs-replay').hide();
+              $('.introjs-tooltipbuttons').hide();
+            }, function() {
+              $('.tooltipDelayIntro').hide();
+              $('.introjs-alwaysSkipButton.alwaysSkip').show();
+              $('.introjs-replay').show();
+              $('.introjs-tooltipbuttons').show();
+            }
+        );
+        */
+
       }
 
     <% end %>

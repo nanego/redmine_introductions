@@ -27,18 +27,20 @@ fr:
   right: "Droite"
   button_confirm: "Confirmer"
   field_no_introductions: "Ne pas afficher les présentations des nouvelles fonctionnalités"
-  button_confirm_do_not_show_intro: "Ne plus afficher cette présentation"
-  replay: "Rejouer du début"
+  button_confirm_do_not_show_intro: "Ne plus jamais afficher"
+  replay: "Rejouer"
   quit: "Fermer"
-  replay_later: "Rejouer plus tard"
+  replay_later: "Fermer"
   cancel: "Abandonner"
   test_url: "URL de test"
   step_text_hint: "Texte à afficher pour cette étape. Possibilité d'utiliser du code HTML"
   change_url: "Changement de page ?"
   prevLabel: "&larr;"
+  # prevLabel: '&larr; Précédent'
   nextLabel: 'Suivant &rarr;'
+  # nextLabel: '&rarr;'
   nextPage: 'Page suivante'
   they_hid_it: "Utilisateurs ayant caché cette présentation :"
-  nobody_has_hidden_it: "Aucun utilisateurs n'a caché cette présentation."
+  nobody_has_hidden_it: "Aucun utilisateur n'a caché cette présentation."
   reactivate: "Réactiver"
   intro_permanently_blocked: "Permanent"

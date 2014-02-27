@@ -201,6 +201,8 @@
         document.attachEvent("onresize", self._onResize);
       }
     }
+
+
     return false;
   }
 
@@ -372,6 +374,21 @@
         arrowLayer.className = 'introjs-arrow top';
         break;
     }
+
+      // Custom for redmine plugin
+      $('#introjs-quitButton').hover(
+          function() {
+              $('.tooltipDelayIntro').show();
+              $('.introjs-alwaysSkipButton.alwaysSkip').hide();
+              $('.introjs-replay').hide();
+              $('.introjs-tooltipbuttons').hide();
+          }, function() {
+              $('.tooltipDelayIntro').hide();
+              $('.introjs-alwaysSkipButton.alwaysSkip').show();
+              $('.introjs-replay').show();
+              $('.introjs-tooltipbuttons').show();
+          }
+      );
   }
 
   /**
@@ -403,6 +420,8 @@
    * @param {Object} targetElement
    */
   function _showElement(targetElement) {
+
+
 
     if (typeof (this._introChangeCallback) !== 'undefined') {
         this._introChangeCallback.call(this, targetElement.element);
@@ -584,19 +603,22 @@
       _placeTooltip.call(self, targetElement.element, tooltipLayer, arrowLayer);
     }
 
+    // Custom for redmine plugin
+    $('.introjs-skipbutton').hide();
     if (this._currentStep == 0) {
-      if(customParams.lastPage==true && this._introItems.length - 1 == this._currentStep){
-        $('.introjs-tooltipbuttons').hide();
-      }else{
-        $('.introjs-tooltipbuttons').show();
-      }
+      // if(customParams.lastPage==true && this._introItems.length - 1 == this._currentStep){
+      //   $('.introjs-tooltipbuttons').hide();
+      //  }else{
+      //   $('.introjs-tooltipbuttons').show();
+      // }
       prevTooltipButton.className = 'introjs-button introjs-prevbutton introjs-disabled';
       nextTooltipButton.className = 'introjs-button introjs-nextbutton';
       skipTooltipButton.innerHTML = this._options.skipLabel;
+      nextTooltipButton.innerHTML = this._options.nextLabel;
     } else if (this._introItems.length - 1 == this._currentStep) {
-      if(customParams.lastPage==true){
-        $('.introjs-tooltipbuttons').hide();
-      }
+      // if (customParams.lastPage==true) {
+      //   $('.introjs-tooltipbuttons').hide();
+      // }
       skipTooltipButton.innerHTML = this._options.doneLabel;
       prevTooltipButton.className = 'introjs-button introjs-prevbutton';
       nextTooltipButton.className = 'introjs-button introjs-nextbutton introjs-disabled';
@@ -605,6 +627,7 @@
       prevTooltipButton.className = 'introjs-button introjs-prevbutton';
       nextTooltipButton.className = 'introjs-button introjs-nextbutton';
       skipTooltipButton.innerHTML = this._options.skipLabel;
+      nextTooltipButton.innerHTML = '&rarr;';
     }
 
     //Set focus on "next" button, so that hitting Enter always moves you onto the next step
@@ -646,6 +669,10 @@
         window.scrollBy(0, bottom + 100); // 70px + 30px padding from edge to look nice
       }
     }
+
+
+
+
   }
 
   /**

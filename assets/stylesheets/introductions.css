@@ -77,7 +77,8 @@ a.btn-replay:hover, a.btn-leave:hover {
     width: 618px;
 }
 
-.introjs-skipbutton {
+.introjs-alwaysSkipButton {
+    margin-left: 5px;
     background: transparent;
     text-shadow: none;
     border: none;
@@ -85,25 +86,29 @@ a.btn-replay:hover, a.btn-leave:hover {
     cursor: pointer;
     color: #169;
 }
-.introjs-skipbutton:hover,
-.introjs-skipbutton:focus,
-.introjs-skipbutton:active {
+.introjs-alwaysSkipButton:hover,
+.introjs-alwaysSkipButton:focus,
+.introjs-alwaysSkipButton:active {
     border-color: transparent;
     text-decoration: underline;
     box-shadow: none;
     background: transparent;
 }
 
-.introjs-skipbutton.alwaysSkip{
+.introjs-alwaysSkipButton.alwaysSkip{
     font-size: 10px;
     padding: 0;
-    margin-right: 3px;
+    padding-top: 4px;
 }
 
 .introjs-replay {
-    margin-right: 5px;
-    margin-top: 0px;
+    margin-right: 0;
+    margin-top: 0;
     padding: 0.3em 0.5em;
+    -webkit-border-radius: 0 0.2em 0.2em 0;
+    -moz-border-radius: 0 0.2em 0.2em 0;
+    border-radius: 0 0.2em 0.2em 0;
+    min-height: 14px;
 }
 .introjs-replay img{
     margin-bottom: -1px;
@@ -121,6 +126,7 @@ a.btn-replay:hover, a.btn-leave:hover {
     text-shadow: none;
     border: 1px solid #999999;
     margin-top: 0px;
+    float: left;
 }
 .introjs-quit:hover {
     border-color: #909090;
@@ -128,15 +134,35 @@ a.btn-replay:hover, a.btn-leave:hover {
     box-shadow: 0px 1px 1px #dddddd;
 }
 
-.skipbutton_container{
-    clear: both;
-    margin-top: 5px;margin-bottom: 0;float:right;
+.skipbutton_container_left{
+    margin-top: 10px;
+    margin-bottom: 0;
+    float:left;
+}
+
+.skipbutton_container_right{
+    margin-top: 5px;
+    margin-bottom: 0;
+    float:right;
 }
 
 .closebutton_container{
     margin-top: 12px;margin-bottom: 3px;float:right;
 }
 
+.replay_button_container{
+    float: right;
+    margin-top: 10px;
+}
+
 .permanent_tag{
     color: darkgrey;
+}
+
+.tooltipDelayIntro{
+  background-color: transparent;
+  color: darkgrey;
+  font-size: 10px;
+  padding: 5px;
+  float: left;
 }

@@ -30,6 +30,7 @@ en:
   button_confirm_do_not_show_intro: "Do not show anymore"
   replay: "Play again"
   quit: "Exit"
+  replay_later: "Replay later"
   cancel: "Cancel"
   test_url: "test URL"
   step_text_hint: "Text for this step (HTML compatible)"
