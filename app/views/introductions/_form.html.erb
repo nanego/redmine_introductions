@@ -44,7 +44,7 @@
     </div>
   </div>
 
-  <%= submit_tag l('save') %>
+  <%= submit_tag l('save'), id: "save_intro_button" %>
   <%= link_to l('cancel'), introductions_url, class: 'cancel' %>
 
 <% end %>
@@ -56,4 +56,14 @@
     });
     // $( "#sortable" ).disableSelection();
   });
+
+  $('#save_intro_button').on('click', function () {
+    try {
+      new RegExp($('input#introduction_url').val());
+    } catch(e) {
+      alert(e);
+      return false;
+    }
+  });
+
 </script>
