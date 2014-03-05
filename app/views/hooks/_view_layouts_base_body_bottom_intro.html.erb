@@ -19,6 +19,24 @@
 
         <% lastView = IntroductionsUser.find_by_introduction_id_and_user_id(intro.id, User.current.id) %>
 
+
+        /*
+        try {
+          new RegExp("<%=intro.url%>");
+        }
+        catch(e) {
+          alert(e);
+        }
+        */
+
+        <% # if regex is invalid, do not throw exception and do not show the introduction
+          begin
+            Regexp.new("#{intro.url}")
+          rescue
+            intro.url="error_in_introduction_url"
+          end
+        %>
+
         <% if ((User.current.pref[:no_introductions] == nil || User.current.pref[:no_introductions] == "0") && (lastView == nil || lastView.blocked == false && lastView.last_view < Time.now - 1.day) && (intro.url.blank? || request.fullpath =~ Regexp.new("#{intro.url}"))) || (params[:multipage] && params[:intro_step]) %>
 
           nbIntros++;
