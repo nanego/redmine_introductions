@@ -1,4 +1,5 @@
 <script type="text/javascript">
+  //<![CDATA[
   $(function() {
 
     <% if params[:no_intro] != 'true' %>
@@ -47,7 +48,7 @@
                   next_step_id = <%= step.id %>;
                   <% break %>
               <% else
-                  step.text << bottom_buttons(intro, step, params) unless Rails.env.test? %>
+                  step.text << bottom_buttons(intro, step, params) %>
                   setIntroParams("<%= escape_javascript(raw step.selector) %>", "<%= escape_javascript(step.text.html_safe) %>", "<%= escape_javascript(raw step.position) %>", "<%= escape_javascript(raw step.step) %>");
                   selectors.push("<%= escape_javascript(raw step.selector) %>");
               <% end %>
@@ -71,4 +72,5 @@
     <% end %>
 
   });
+  //]]>
 </script>
