@@ -606,19 +606,11 @@
     // Custom for redmine plugin
     $('.introjs-skipbutton').hide();
     if (this._currentStep == 0) {
-      // if(customParams.lastPage==true && this._introItems.length - 1 == this._currentStep){
-      //   $('.introjs-tooltipbuttons').hide();
-      //  }else{
-      //   $('.introjs-tooltipbuttons').show();
-      // }
       prevTooltipButton.className = 'introjs-button introjs-prevbutton introjs-disabled';
       nextTooltipButton.className = 'introjs-button introjs-nextbutton';
       skipTooltipButton.innerHTML = this._options.skipLabel;
       nextTooltipButton.innerHTML = this._options.nextLabel;
     } else if (this._introItems.length - 1 == this._currentStep) {
-      // if (customParams.lastPage==true) {
-      //   $('.introjs-tooltipbuttons').hide();
-      // }
       skipTooltipButton.innerHTML = this._options.doneLabel;
       prevTooltipButton.className = 'introjs-button introjs-prevbutton';
       nextTooltipButton.className = 'introjs-button introjs-nextbutton introjs-disabled';

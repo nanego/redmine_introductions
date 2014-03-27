@@ -1,3 +1,6 @@
+require File.dirname(__FILE__) + '/../../app/helpers/introductions_helper'
+include IntroductionsHelper
+
 module RedmineIntroductions
   class Hooks < Redmine::Hook::ViewListener
 
