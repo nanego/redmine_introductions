@@ -1,11 +1,5 @@
 <li class="ui-state-default" style="margin-bottom: 5px;list-style-type: none;">
   <div style="float: right;">
-    <!--
-    <div class="label_step_priority">
-      < f.object.step >
-    </div>
-    <br/>
-    -->
     <div class="drag_arrows">
       <%= image_tag 'drag.png', :plugin => 'redmine_introductions' %>
     </div>
@@ -27,7 +21,6 @@
   <p class="new_url_checkbox" data-new-url-checkbox-id="<%= f.object.object_id %>" >
     <%= f.label l('change_url') %>
     <%= check_box_tag "new_url_checkbox", l('general_text_Yes'), !f.object.url.blank? %>
-    <!-- <span class="hint"> <%= l('general_text_Yes') %> </span> -->
   </p>
 
   <p id="new_url_<%= f.object.object_id %>" style="display: <%= f.object.url.blank? ? 'none' : 'block' %>">

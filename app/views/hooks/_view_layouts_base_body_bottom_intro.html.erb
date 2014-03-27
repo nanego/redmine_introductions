@@ -42,15 +42,14 @@
             <% if started %>
 
               <% if step.url && !step.url.blank? && previous_step && step.url != previous_step.url %>
-                intro_id = <%= intro.id %>;
-                next_url = "<%= step.url %>";
-                next_step_id = <%= step.id %>;
-                <% break %>
+                  intro_id = <%= intro.id %>;
+                  next_url = "<%= step.url %>";
+                  next_step_id = <%= step.id %>;
+                  <% break %>
               <% else
-                   step.text << bottom_buttons(intro, step, params) unless Rails.env.test?
-              %>
-                setIntroParams("<%= escape_javascript(raw step.selector) %>", "<%= escape_javascript(raw step.text) %>", "<%= escape_javascript(raw step.position) %>", "<%= escape_javascript(raw step.step) %>");
-                selectors.push("<%= escape_javascript(raw step.selector) %>");
+                  step.text << bottom_buttons(intro, step, params) unless Rails.env.test? %>
+                  setIntroParams("<%= escape_javascript(raw step.selector) %>", "<%= escape_javascript(step.text.html_safe) %>", "<%= escape_javascript(raw step.position) %>", "<%= escape_javascript(raw step.step) %>");
+                  selectors.push("<%= escape_javascript(raw step.selector) %>");
               <% end %>
               <% previous_step = step %>
             <% end %>

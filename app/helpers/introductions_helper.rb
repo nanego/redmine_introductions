@@ -22,8 +22,8 @@ module IntroductionsHelper
         #{ form_for :update_last_view_date, url: introduction_update_last_view_date_path(intro), method: :post, :remote => true do |f|
             f.submit l("replay_later"), class: 'introjs-button introjs-quit', id: "introjs-quitButton"
           end }
-          #{ content_tag :div, l('quit_tooltip'), class: "tooltipDelayIntro", style: "display: none;" }
-          #{ form_for :do_not_show_again, url: introduction_do_not_show_again_path(intro), method: :post, :remote => true do |f|
+        #{ content_tag :div, l('quit_tooltip'), class: "tooltipDelayIntro", style: "display: none;" }
+        #{ form_for :do_not_show_again, url: introduction_do_not_show_again_path(intro), method: :post, :remote => true do |f|
             f.submit l(:button_confirm_do_not_show_intro), class: 'introjs-alwaysSkipButton alwaysSkip'
           end }
       </div>
