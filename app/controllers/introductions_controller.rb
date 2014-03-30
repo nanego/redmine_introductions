@@ -1,6 +1,9 @@
 class IntroductionsController < ApplicationController
   unloadable
 
+  before_filter :require_admin, except: [:do_not_show_again, :show_again, :update_last_view_date]
+  layout "admin"
+
   def index
     @introductions = Introduction.order("id asc").all
     render :layout => 'admin'
