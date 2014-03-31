@@ -6,12 +6,12 @@ class IntroductionsController < ApplicationController
 
   def index
     @introductions = Introduction.order("id asc").all
-    render :layout => 'admin'
   end
 
   def new
     @introduction = Introduction.new
     @introduction.introduction_steps.build
+    render :layout => 'base'
   end
 
   def create
@@ -35,6 +35,7 @@ class IntroductionsController < ApplicationController
   def edit
     @introduction = Introduction.find(params[:id])
     @intros_users = @introduction.introductions_users.where("last_view > ? OR blocked=#{Introduction.connection.quoted_true}", Time.now-1.day).order("last_view desc").all
+    render :layout => 'base'
   end
 
   def update
