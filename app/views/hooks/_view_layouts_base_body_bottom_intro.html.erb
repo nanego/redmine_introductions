@@ -10,11 +10,13 @@
       var selectors = [];
       var nbIntros = 0;
 
-      <% if params[:intro_id] %>
-        <% @intros = [Introduction.find(params[:intro_id])] %>
-      <% else %>
-        <% @intros = Introduction.active.not_disabled_by_user(User.current) %>
-      <% end %>
+      <% if params[:intro_id]
+          @intros = [Introduction.find(params[:intro_id])]
+          @intros.each { |intro| intro.url = intro.url[0...-1] if intro.url[intro.url.length-1]=='$' } #remove this specific regex in order to test the intro
+        else
+          @intros = Introduction.active.not_disabled_by_user(User.current)
+        end
+      %>
 
       <% @intros.each do |intro| %>
 
