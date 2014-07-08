@@ -116,7 +116,7 @@
   position: absolute;
   padding: 10px;
   background-color: white;
-  min-width: 250px;
+  min-width: 270px;
   max-width: 300px;
   border-radius: 3px;
   box-shadow: 0 1px 10px rgba(0,0,0,.4);
@@ -188,7 +188,7 @@
 }
 
 .introjs-skipbutton {
-  margin-right: 5px;
+  margin-right: 0px;
   color: #7a7a7a;
 }
 

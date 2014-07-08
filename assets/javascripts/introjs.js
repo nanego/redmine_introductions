@@ -53,7 +53,9 @@
       /* Show tour control buttons? */
       showButtons: true,
       /* Show tour bullets? */
-      showBullets: true
+      showBullets: true,
+      /* Is there a page after this one? */
+      nextPage: false
     };
   }
 
@@ -589,13 +591,13 @@
         _exitIntro.call(self, self._targetElement);
       };
 
-      buttonsLayer.appendChild(skipTooltipButton);
-
       //in order to prevent displaying next/previous button always
       if (this._introItems.length > 1) {
         buttonsLayer.appendChild(prevTooltipButton);
         buttonsLayer.appendChild(nextTooltipButton);
       }
+
+      buttonsLayer.appendChild(skipTooltipButton);
 
       tooltipLayer.appendChild(buttonsLayer);
 
@@ -620,6 +622,10 @@
       nextTooltipButton.className = 'introjs-button introjs-nextbutton';
       skipTooltipButton.innerHTML = this._options.skipLabel;
       nextTooltipButton.innerHTML = '&rarr;';
+    }
+    if (this._options.nextPage === true && this._introItems.length - 1 == this._currentStep) {
+      $('.introjs-skipbutton').show();
+      $('.introjs-prevbutton').hide();
     }
 
     //Set focus on "next" button, so that hitting Enter always moves you onto the next step

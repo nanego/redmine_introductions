@@ -4,31 +4,40 @@ function setIntroParams(selector, text, position, step) {
   $(selector).attr('data-step', step);
 }
 
-function startIntroductions(first_url, intro_id, next_url, next_step_id, selectors) {
-
+function startIntroductions(first_url, intro_id, next_url, next_step_id, selectors, current_step) {
     if(validateSelectorsPresence(selectors)){
         if(next_url != ""){
-            introJs().setOptions({ 'tooltipClass': "introJsTooltipClass",
+            intro = introJs().setOptions({ 'tooltipClass': "introJsTooltipClass",
                 'showStepNumbers': false,
                 'showButtons': true,
                 'showBullets':false,
+                'nextPage':true,
                 'doneLabel': I18n.nextPage,
                 'skipLabel': I18n.quit,
                 'prevLabel': I18n.prevLabel,
                 'nextLabel': I18n.nextLabel
-            }).start().oncomplete(function() {
+            });
+            if (current_step>1){
+              intro.goToStep(current_step);
+            }
+            intro.start().oncomplete(function() {
                     window.location.href = next_url + '?multipage=true&intro_id='+intro_id+'&intro_step=' + next_step_id + "&first_url=" + first_url;
-                });
+            });
         }else{
-            introJs().setOptions({ 'tooltipClass': "introJsTooltipClass",
+            intro = introJs().setOptions({ 'tooltipClass': "introJsTooltipClass",
                 'showStepNumbers': false,
                 'showButtons': true,
                 'showBullets':false,
+                'nextPage':false,
                 'doneLabel': I18n.quit,
                 'skipLabel': I18n.quit,
                 'prevLabel': I18n.prevLabel,
                 'nextLabel': I18n.nextLabel
-            }).start();
+            });
+            if (current_step>1){
+              intro.goToStep(current_step);
+            }
+            intro.start();
         }
     }
 }
