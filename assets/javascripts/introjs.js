@@ -261,6 +261,7 @@
    */
   function _previousStep() {
     if (this._currentStep === 0) {
+      $("a.introjs-prevPage").click();
       return false;
     }
 
@@ -565,9 +566,7 @@
       var prevTooltipButton = document.createElement('a');
 
       prevTooltipButton.onclick = function() {
-        if (self._currentStep != 0) {
-          _previousStep.call(self);
-        }
+        _previousStep.call(self);
       };
 
       prevTooltipButton.href = 'javascript:void(0);';
@@ -608,7 +607,7 @@
     // Custom for redmine plugin
     $('.introjs-skipbutton').hide();
     if (this._currentStep == 0) {
-      prevTooltipButton.className = 'introjs-button introjs-prevbutton introjs-disabled';
+      prevTooltipButton.className = 'introjs-button introjs-prevbutton';
       nextTooltipButton.className = 'introjs-button introjs-nextbutton';
       skipTooltipButton.innerHTML = this._options.skipLabel;
       nextTooltipButton.innerHTML = this._options.nextLabel;
@@ -625,7 +624,7 @@
     }
     if (this._options.nextPage === true && this._introItems.length - 1 == this._currentStep) {
       $('.introjs-skipbutton').show();
-      $('.introjs-prevbutton').hide();
+      // $('.introjs-prevbutton').hide();
     }
 
     //Set focus on "next" button, so that hitting Enter always moves you onto the next step

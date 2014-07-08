@@ -27,10 +27,6 @@ module IntroductionsHelper
       end
     end
     "<div>
-      <div class='replay_button_container'>
-        #{link_to('←', '#', :onclick=> "location.href=\"#{previous_step_url.present? ? previous_step_url : params[:first_url]}?multipage=true&intro_id=#{intro.id}&intro_step=#{previous_step_number}&first_url=#{params[:first_url]}\";", class: 'introjs-button introjs-replay') if step.url.present? && step.url.length>0 }
-        #{link_to(l('replay'), '#', :onclick=> "#{params[:first_url] ? "location.href=\'#{params[:first_url]}\';" : 'location.reload();'}", class: 'introjs-button introjs-replay') if intro.introduction_steps.size > 1 && step == intro.introduction_steps.last }
-      </div>
       <div class='skipbutton_container_left'>
         #{ form_for :update_last_view_date, url: introduction_update_last_view_date_path(intro), method: :post, :remote => true do |f|
             f.submit l("replay_later"), class: 'introjs-button introjs-quit', id: "introjs-quitButton"
@@ -39,6 +35,10 @@ module IntroductionsHelper
         #{ form_for :do_not_show_again, url: introduction_do_not_show_again_path(intro), method: :post, :remote => true do |f|
             f.submit l(:button_confirm_do_not_show_intro), class: 'introjs-alwaysSkipButton alwaysSkip'
           end }
+      </div>
+      <div class='replay_button_container'>
+        #{link_to('←', '#', :onclick=> "location.href=\"#{previous_step_url.present? ? previous_step_url : params[:first_url]}?multipage=true&intro_id=#{intro.id}&intro_step=#{previous_step_number}&first_url=#{params[:first_url]}\";", class: 'introjs-button introjs-replay introjs-prevPage introjs-disabled') if step.url.present? && step.url.length>0 }
+        #{link_to(l('replay'), '#', :onclick=> "#{params[:first_url] ? "location.href=\'#{params[:first_url]}\';" : 'location.reload();'}", class: 'introjs-button introjs-replay') if intro.introduction_steps.size > 1 && step == intro.introduction_steps.last }
       </div>
     </div>"
   end
