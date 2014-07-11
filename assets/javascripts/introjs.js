@@ -460,6 +460,8 @@
       //remove old classes
       var oldShowElement = document.querySelector('.introjs-showElement');
       oldShowElement.className = oldShowElement.className.replace(/introjs-[a-zA-Z]+/g, '').replace(/^\s+|\s+$/g, '');
+      $(oldShowElement).find('td').removeClass('introjs-showElement').removeClass('introjs-relativePosition');
+
       //we should wait until the CSS3 transition is competed (it's 0.3 sec) to prevent incorrect `height` and `width` calculation
       if (self._lastShowElementTimer) {
         clearTimeout(self._lastShowElementTimer);
@@ -627,6 +629,11 @@
       // $('.introjs-prevbutton').hide();
     }
 
+    if (oldHelperLayer === null) {
+      //set proper position, again
+      _placeTooltip.call(self, targetElement.element, tooltipLayer, arrowLayer);
+    }
+
     //Set focus on "next" button, so that hitting Enter always moves you onto the next step
     nextTooltipButton.focus();
 
@@ -638,6 +645,8 @@
         currentElementPosition !== 'relative') {
       //change to new intro item
       targetElement.element.className += ' introjs-relativePosition';
+
+      $(targetElement.element).find('td').addClass(' introjs-relativePosition').addClass('introjs-showElement');
     }
 
     var parentElm = targetElement.element.parentNode;
