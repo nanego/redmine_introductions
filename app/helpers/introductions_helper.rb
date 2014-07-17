@@ -37,7 +37,7 @@ module IntroductionsHelper
           end }
       </div>
       <div class='replay_button_container'>
-        #{link_to('←', '#', :onclick=> "location.href=\"#{previous_step_url.present? ? previous_step_url : params[:first_url]}?multipage=true&intro_id=#{intro.id}&intro_step=#{previous_step_number}&first_url=#{params[:first_url]}\";", class: 'introjs-button introjs-replay introjs-prevPage introjs-disabled') if step.url.present? && step.url.length>0 }
+        #{link_to('←', '#', :onclick=> "location.href=\"#{previous_step_url.present? ? previous_step_url : params[:first_url]}?multipage=true&intro_id=#{intro.id}&intro_step=#{previous_step_number}&first_url=#{params[:first_url]}\";", class: 'introjs-button introjs-prevPage introjs-disabled') if step.url.present? && step.url.length>0 }
         #{link_to(l('replay'), '#', :onclick=> "#{params[:first_url] ? "location.href=\'#{params[:first_url]}\';" : 'location.reload();'}", class: 'introjs-button introjs-replay') if intro.introduction_steps.size > 1 && step == intro.introduction_steps.last }
       </div>
     </div>"
