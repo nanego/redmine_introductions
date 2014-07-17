@@ -43,25 +43,27 @@ function startIntroductions(first_url, intro_id, next_url, next_step_id, selecto
 }
 
 jQuery(function() {
-    $('#introduction_form').on('click', '.remove_fields', function(event) {
-        $(this).prev('input[type=hidden]').val('1');
-        $(this).closest('li').hide();
-    });
-    $('#introduction_form').on('click', '.add_fields', function(event) {
-        var regexp, time;
-        time = new Date().getTime();
-        regexp = new RegExp($(this).data('id'), 'g');
-        $(this).before($(this).data('fields').replace(regexp, time));
-        updateStepsPriorities();
-    });
-    $('#introduction_form').on('click', '#new_url_checkbox', function(event){
-       id = $(this).closest("p").attr("data-new-url-checkbox-id");
-       $('#new_url_'+id).toggle();
-    });
+  $('#introduction_form').on('click', '.remove_fields', function(event) {
+    event.preventDefault();
+    $(this).prev('input[type=hidden]').val('1');
+    $(this).closest('li').hide();
+  });
+  $('#introduction_form').on('click', '.add_fields', function(event) {
+    event.preventDefault();
+    var regexp, time;
+    time = new Date().getTime();
+    regexp = new RegExp($(this).data('id'), 'g');
+    $(this).before($(this).data('fields').replace(regexp, time));
+    updateStepsPriorities();
+  });
+  $('#introduction_form').on('click', '#new_url_checkbox', function(event){
+    id = $(this).closest("p").attr("data-new-url-checkbox-id");
+    $('#new_url_'+id).toggle();
+  });
 });
 
 function updateStepsPriorities() {
-    var steps = $('.ui-state-default');
+    var steps = $('#sortable li:visible');
     i = 1;
     steps.each(function() {
         $(this).find('.order_step').val(i);

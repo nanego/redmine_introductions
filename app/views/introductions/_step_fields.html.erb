@@ -1,36 +1,50 @@
-<li class="ui-state-default" style="margin-bottom: 5px;list-style-type: none;">
-  <div style="float: right;">
-    <div class="drag_arrows">
-      <%= image_tag 'drag.png', :plugin => 'redmine_introductions' %>
-    </div>
-  </div>
+<li style="margin-bottom: 5px;list-style-type: none;border: 1px solid #ccc;
+    background-color: #fcfcfc;
+    font-weight: bold;
+    color: #628db6;">
+
   <%= f.hidden_field :step, :size => 10, :disabled => false, :required => false, :class => "order_step" %>
-  <p>
-    <%= f.label l('text') %>
-    <%= f.text_area :text, :size => 70, :disabled => false, :required => false, :class => "introduction_step_text", :placeholder=> l("step_text_hint") %>
-  </p>
-  <p>
-    <%= f.label l('selector') %>
-    <%= f.text_field :selector, :size => 30, :disabled => false, :required => false %>
-  </p>
-  <p>
-    <%= f.label l('position') %>
-    <%= f.select :position, Introduction::POSITIONS, :disabled => false, :required => false, :selected => f.object.position %>
-  </p>
 
-  <p class="new_url_checkbox" data-new-url-checkbox-id="<%= f.object.object_id %>" >
-    <%= f.label l('change_url') %>
-    <%= check_box_tag "new_url_checkbox", l('general_text_Yes'), !f.object.url.blank? %>
-  </p>
+  <div style="float: left;max-width: 450px;">
+    <p>
+      <%= f.label l('text') %>
+      <%= f.text_area :text, :size => 70, :disabled => false, :required => false, :class => "introduction_step_text", :placeholder=> l("step_text_hint") %>
+    </p>
+  </div>
 
-  <p id="new_url_<%= f.object.object_id %>" style="display: <%= f.object.url.blank? ? 'none' : 'block' %>">
-    <%= f.label :url %>
-    <%= f.text_field :url, :size => 50, :disabled => false, :required => false %>
-    <span class="hint"> <%= l('hint_url_no_regexp') %> </span>
-  </p>
+  <div style="float: left;">
+    <p>
+      <%= f.label l('selector') %>
+      <%= f.text_field :selector, :size => 30, :disabled => false, :required => false %>
+    </p>
+    <p>
+      <%= f.label l('position') %>
+      <%= f.select :position, Introduction::POSITIONS, :disabled => false, :required => false, :selected => f.object.position %>
+    </p>
 
-  <p>
+    <p class="new_url_checkbox" data-new-url-checkbox-id="<%= f.object.object_id %>" >
+      <%= f.label l('change_url') %>
+      <%= check_box_tag "new_url_checkbox", l('general_text_Yes'), !f.object.url.blank? %>
+    </p>
+
+    <p id="new_url_<%= f.object.object_id %>" style="display: <%= f.object.url.blank? ? 'none' : 'block' %>">
+      <%= f.label :url %>
+      <%= f.text_field :url, :size => 50, :disabled => false, :required => false %></br>
+      <span class="hint"> <%= l('hint_url_no_regexp') %> </span>
+    </p>
+  </div>
+
+  <div style="float: right;margin-top: 5px;margin-right: 9px;">
     <%= f.hidden_field :_destroy %>
     <%= link_to l("remove_step"), '#', class: "remove_fields" %>
-  </p>
+  </div>
+
+  <div style="clear: both;"></div>
+
+  <div style="float: left;margin-top: -50px;">
+    <div class="label_step_priority">
+      <%= f.object.step %>
+    </div>
+  </div>
+
 </li>
