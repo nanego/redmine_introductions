@@ -92,6 +92,7 @@
         <% if params[:first_url] %>
           var first_url = '<%= params[:first_url] %>'
         <% end %>
+
         startIntroductions(first_url || window.location.pathname, intro_id, next_url, next_step_number, selectors, current_step);
       }
 

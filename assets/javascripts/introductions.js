@@ -37,7 +37,13 @@ function startIntroductions(first_url, intro_id, next_url, next_step_id, selecto
             if (current_step>1){
               intro.goToStep(current_step);
             }
-            intro.start();
+            if (first_url!==window.location.href) {
+              intro.start().oncomplete(function() {
+                window.location.href = first_url + '?no_intro=true';
+              });
+            }else{
+              intro.start();
+            }
         }
     }
 }

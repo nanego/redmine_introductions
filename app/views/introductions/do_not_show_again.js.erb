@@ -1,5 +1,13 @@
-<% if !params[:first_url].blank? %>
-  window.location.href = "<%= params[:first_url] %>?no_intro=true";
-<% else %>
+var first_url = getParameterByName('first_url');
+if(first_url.length>0){
+  window.location.href = first_url+"?no_intro=true";
+}else{
   introJs().exit();
-<% end %>
+}
+
+function getParameterByName(name) {
+  name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+  var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+      results = regex.exec(location.search);
+  return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
