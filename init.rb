@@ -1,6 +1,9 @@
 require 'redmine'
 require_dependency 'redmine_introductions/hooks'
-require_dependency 'redmine_introductions/user_preference_patch'
+
+Rails.application.config.to_prepare do
+  require_dependency 'redmine_introductions/user_preference_patch'
+end
 
 # Little hack for deface in redmine:
 # - redmine plugins are not railties nor engines, so deface overrides are not detected automatically
