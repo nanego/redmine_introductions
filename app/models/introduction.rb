@@ -16,7 +16,7 @@ class Introduction < ActiveRecord::Base
   has_many :introductions_users
   has_many :users, through: :introductions_users
 
-  scope :active, where("(start_at = NULL OR start_at <= ?) AND (stop_at = NULL OR stop_at >= ?)", DateTime.now, DateTime.now )
+  scope :active, -> { where("(start_at = NULL OR start_at <= ?) AND (stop_at = NULL OR stop_at >= ?)", DateTime.now, DateTime.now ) }
 
   def self.not_disabled_by_user(user)
     where("")

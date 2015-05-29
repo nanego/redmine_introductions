@@ -5,8 +5,8 @@ class IntroductionStep < ActiveRecord::Base
 
   belongs_to :introduction
 
-  default_scope order('step ASC')
+  default_scope { order('step ASC') }
 
-  scope :last, order("step desc").limit(1)
+  scope :last_introduction_step, -> { order("step desc").limit(1) }
 
 end

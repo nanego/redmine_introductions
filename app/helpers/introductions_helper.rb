@@ -17,7 +17,7 @@ module IntroductionsHelper
     previous_step_url = nil
     if step.url.present? && step.url.length>0
       previous_steps = IntroductionStep.where("introduction_id = ? AND step < ?", step.introduction_id, step.step).order("step")
-      previous_step_number = previous_steps.last.step
+      previous_step_number = previous_steps.last_introduction_step.step
       previous_steps.reverse!
       previous_steps.each do |s|
         if s.url.present?
@@ -38,7 +38,7 @@ module IntroductionsHelper
       </div>
       <div class='replay_button_container'>
         #{link_to('←', '#', :onclick=> "location.href=\"#{previous_step_url.present? ? previous_step_url : params[:first_url]}?multipage=true&intro_id=#{intro.id}&intro_step=#{previous_step_number}&first_url=#{params[:first_url]}\";", class: 'introjs-button introjs-prevPage introjs-disabled') if step.url.present? && step.url.length>0 }
-        #{link_to(l('replay'), '#', :onclick=> "#{params[:first_url] ? "location.href=\'#{params[:first_url]}\';" : 'location.reload();'}", class: 'introjs-button introjs-replay') if intro.introduction_steps.size > 1 && step == intro.introduction_steps.last }
+        #{link_to(l('replay'), '#', :onclick=> "#{params[:first_url] ? "location.href=\'#{params[:first_url]}\';" : 'location.reload();'}", class: 'introjs-button introjs-replay') if intro.introduction_steps.size > 1 && step == intro.introduction_steps.last_introduction_step }
       </div>
     </div>"
   end
