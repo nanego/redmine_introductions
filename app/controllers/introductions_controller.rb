@@ -63,7 +63,7 @@ class IntroductionsController < ApplicationController
   end
 
   def do_not_show_again
-    @intro_user = IntroductionsUser.find_or_create_by_introduction_id_and_user_id(params[:introduction_id].to_i, User.current.id)
+    @intro_user = IntroductionsUser.find_or_create_by(introduction_id: params[:introduction_id].to_i, user_id: User.current.id)
     @intro_user.blocked = true
     @intro_user.last_view = Time.now
     @intro_user.save!
@@ -78,7 +78,7 @@ class IntroductionsController < ApplicationController
   end
 
   def update_last_view_date
-    @intro_user = IntroductionsUser.find_or_create_by_introduction_id_and_user_id(params[:introduction_id].to_i, User.current.id)
+    @intro_user = IntroductionsUser.find_or_create_by(introduction_id: params[:introduction_id].to_i, user_id: User.current.id)
     @intro_user.blocked = false
     @intro_user.last_view = Time.now
     @intro_user.save!
