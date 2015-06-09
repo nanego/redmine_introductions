@@ -1,7 +1,7 @@
 require "spec_helper"
 require "active_support/testing/assertions"
 
-describe IntroductionsController do
+describe IntroductionsController, type: :controller do
   include ActiveSupport::Testing::Assertions
 
   self.fixture_path = File.dirname(__FILE__) + "/../fixtures/"
