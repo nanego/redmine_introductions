@@ -1,5 +1,5 @@
 # English strings go here for Rails i18n
-en:
+en-GB:
   url: "Url"
   step: "Step"
   text: "Text"
