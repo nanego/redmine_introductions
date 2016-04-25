@@ -5,10 +5,12 @@ This redmine plugin add the ability to display introductions for features and to
 
 It is based on the Intro.js project (http://usablica.github.io/intro.js/).
 
-Screenshot
+Example
 ------------
 
 ![redmine_introductions screenshot](http://blog.nanego.com/images/redmine_plugin_introductions.png)
+
+![redmine_introductions configuration_example](https://cloud.githubusercontent.com/assets/1620522/14710594/44e578ce-07d6-11e6-9a22-9b224a3f10b3.png)
 
 Installation
 ------------
