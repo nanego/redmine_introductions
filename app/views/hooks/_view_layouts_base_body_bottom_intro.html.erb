@@ -46,36 +46,39 @@
 
           <% intro.introduction_steps.each do |step| %>
 
-            <% if step.url.present? && step.url.length > 0 && step.step.to_i <= params[:intro_step].to_i %>
-              current_step = current_step - <%= previous_steps_on_the_page.size %>;
-              <% previous_steps_on_the_page = [] %>
+            <% if step %>
+
+              <% if step.url.present? && step.url.length > 0 && step.step.to_i <= params[:intro_step].to_i %>
+                current_step = current_step - <%= previous_steps_on_the_page.size %>;
+                <% previous_steps_on_the_page = [] %>
+              <% end %>
+
+              <% started = true if params[:intro_step] == step.step.to_param %>
+              <% if started %>
+                <% if step.url && !step.url.blank? && previous_step && step.url != previous_step.url %>
+                    intro_id = <%= intro.id %>;
+                    next_url = "<%= step.url %>";
+                    next_step_number = <%= step.step %>;
+                    <% break %>
+                <% else %>
+                    <% step.text << bottom_buttons(intro, step, params) %>
+                    setIntroParams("<%= escape_javascript(raw step.selector) %>", "<%= escape_javascript(step.text.html_safe) %>", "<%= escape_javascript(raw step.position) %>", "<%= escape_javascript(raw step.step) %>");
+                    selectors.push("<%= escape_javascript(raw step.selector) %>");
+                <% end %>
+                <% previous_step = step %>
+              <% else
+                previous_steps_on_the_page << step if (step.step.to_i < params[:intro_step].to_i)
+              end %>
+
             <% end %>
 
-            <% started = true if params[:intro_step] == step.step.to_param %>
-            <% if started %>
-              <% if step.url && !step.url.blank? && previous_step && step.url != previous_step.url %>
-                  intro_id = <%= intro.id %>;
-                  next_url = "<%= step.url %>";
-                  next_step_number = <%= step.step %>;
-                  <% break %>
-              <% else %>
-                  <% step.text << bottom_buttons(intro, step, params) %>
-                  setIntroParams("<%= escape_javascript(raw step.selector) %>", "<%= escape_javascript(step.text.html_safe) %>", "<%= escape_javascript(raw step.position) %>", "<%= escape_javascript(raw step.step) %>");
-                  selectors.push("<%= escape_javascript(raw step.selector) %>");
-              <% end %>
-              <% previous_step = step %>
-            <% else
-              previous_steps_on_the_page << step if (step.step.to_i < params[:intro_step].to_i)
-            end %>
-
-          <% end %>
-
-          <% if previous_steps_on_the_page.present?
-              previous_steps_on_the_page.each do |previous_step|
-                previous_step.text << bottom_buttons(intro, previous_step, params) %>
-                setIntroParams("<%= escape_javascript(raw previous_step.selector) %>", "<%= escape_javascript(previous_step.text.html_safe) %>", "<%= escape_javascript(raw previous_step.position) %>", "<%= escape_javascript(raw previous_step.step) %>");
-                selectors.push("<%= escape_javascript(raw previous_step.selector) %>");
-          <%  end
+            <% if previous_steps_on_the_page.present?
+                previous_steps_on_the_page.each do |previous_step|
+                  previous_step.text << bottom_buttons(intro, previous_step, params) %>
+                  setIntroParams("<%= escape_javascript(raw previous_step.selector) %>", "<%= escape_javascript(previous_step.text.html_safe) %>", "<%= escape_javascript(raw previous_step.position) %>", "<%= escape_javascript(raw previous_step.step) %>");
+                  selectors.push("<%= escape_javascript(raw previous_step.selector) %>");
+            <%  end
+              end
             end
           end %>
       <% end %>
