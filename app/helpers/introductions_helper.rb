@@ -15,14 +15,16 @@ module IntroductionsHelper
 
   def bottom_buttons(intro, step, params)
     previous_step_url = nil
-    if step.url.present? && step.url.length>0
+    if step.url.present?
       previous_steps = IntroductionStep.where("introduction_id = ? AND step < ?", step.introduction_id, step.step).order("step")
-      previous_step_number = previous_steps.last_introduction_step.first.step
-      previous_steps.to_a.reverse!
-      previous_steps.each do |s|
-        if s.url.present?
-          previous_step_url = s.url if previous_step_url.blank?
-          break
+      if previous_steps.present?
+        previous_step_number = previous_steps.last_introduction_step.first.step
+        previous_steps.to_a.reverse!
+        previous_steps.each do |s|
+          if s.url.present?
+            previous_step_url = s.url if previous_step_url.blank?
+            break
+          end
         end
       end
     end
