@@ -13,5 +13,7 @@ Redmine::Plugin.register :redmine_introductions do
   requires_redmine_plugin :redmine_base_deface, :version_or_higher => '0.0.1'
   url 'https://github.com/nanego/redmine_introductions'
   author_url 'mailto:contact@vincent-robert.com'
-  menu :admin_menu, :introductions, { :controller => 'introductions', :action => 'index' }, :caption => :introductions
+  menu :admin_menu, :introductions, { :controller => 'introductions', :action => 'index' },
+       :caption => :introductions,
+       :html => {:class => 'icon'}
 end
