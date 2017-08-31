@@ -83,8 +83,8 @@ describe IntroductionsController, type: :controller do
     post :show_again, :format => 'js', :introduction_id => 1, user_id: 2
     expect(response).to be_success
     assert_template 'show_again'
-    assert_nil IntroductionsUser.find_by_introduction_id_and_user_id(1,2)
-    refute_nil assigns(:intros_users)
+    expect(IntroductionsUser.find_by_introduction_id_and_user_id(1,2)).to be_nil
+    expect(assigns(:intros_users)).to_not be_nil
   end
 
 end
