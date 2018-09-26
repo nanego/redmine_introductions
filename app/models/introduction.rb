@@ -1,5 +1,4 @@
 class Introduction < ActiveRecord::Base
-  unloadable
 
   POSITIONS = {l('bottom') => 'bottom',
                l('top') =>'top',

@@ -13,7 +13,12 @@ Redmine::Plugin.register :redmine_introductions do
   requires_redmine_plugin :redmine_base_deface, :version_or_higher => '0.0.1'
   url 'https://github.com/nanego/redmine_introductions'
   author_url 'mailto:contact@vincent-robert.com'
-  menu :admin_menu, :introductions, { :controller => 'introductions', :action => 'index' },
+  menu :admin_menu, :introductions, {:controller => 'introductions', :action => 'index'},
        :caption => :introductions,
        :html => {:class => 'icon'}
+  settings :partial => 'settings/introductions_settings',
+           :default => {
+               'display_issue_update_warning' => '0',
+               'issue_update_warning' => "Merci d'actualiser le statut et l'assignation avant d'enregistrer vos modifications.",
+           }
 end

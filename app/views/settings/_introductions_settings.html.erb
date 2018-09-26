@@ -1,0 +1,10 @@
+<fieldset>
+  <p>
+    <label><%= l(:display_issue_update_warning) %></label>
+    <%= select_tag 'settings[display_issue_update_warning]', options_for_select([ [l(:general_text_No), '0'], [l(:general_text_Yes), '1'] ], @settings['display_issue_update_warning']) %>
+  </p>
+  <p>
+    <label><%= l(:issue_update_warning) %></label>
+    <%= text_field_tag 'settings[issue_update_warning]', @settings['issue_update_warning'], :size => '60' %>
+  </p>
+</fieldset>

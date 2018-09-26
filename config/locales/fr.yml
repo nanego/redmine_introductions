@@ -45,3 +45,5 @@ fr:
   nobody_has_hidden_it: "Aucun utilisateur n'a caché cette présentation."
   reactivate: "Réactiver"
   intro_permanently_blocked: "Permanent"
+  display_issue_update_warning: "Afficher un message d'avertissement sur le formulaire de modification des demandes ?"
+  issue_update_warning: "Contenu du message d'avertissement :"
