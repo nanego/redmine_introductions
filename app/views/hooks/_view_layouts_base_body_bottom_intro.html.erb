@@ -91,9 +91,9 @@
                      }
          %>
         window.I18n = <%= locales.to_json.html_safe %>
-        var first_url;
+        var first_url
         <% if params[:first_url] %>
-          var first_url = '<%= params[:first_url] %>'
+          first_url = '<%= params[:first_url] %>'
         <% end %>
 
         startIntroductions(first_url || window.location.pathname, intro_id, next_url, next_step_number, selectors, current_step);
