@@ -1,11 +1,12 @@
 class Introduction < ActiveRecord::Base
+  include Redmine::SafeAttributes
 
   POSITIONS = {l('bottom') => 'bottom',
                l('top') =>'top',
                l('left') =>'left',
                l('right') =>'right'}
 
-  attr_accessible :name, :url, :start_at, :stop_at, :introduction_steps_attributes, :test_url
+  safe_attributes :name, :url, :start_at, :stop_at, :introduction_steps_attributes, :test_url
 
   validates_presence_of :name
 

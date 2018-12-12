@@ -306,7 +306,7 @@
     if (fixParents && fixParents.length > 0) {
       for (var i = fixParents.length - 1; i >= 0; i--) {
         fixParents[i].className = fixParents[i].className.replace(/introjs-fixParent/g, '').replace(/^\s+|\s+$/g, '');
-      };
+      }
     }
     //clean listeners
     if (window.removeEventListener) {
@@ -454,7 +454,7 @@
       if (fixParents && fixParents.length > 0) {
         for (var i = fixParents.length - 1; i >= 0; i--) {
           fixParents[i].className = fixParents[i].className.replace(/introjs-fixParent/g, '').replace(/^\s+|\s+$/g, '');
-        };
+        }
       }
 
       //remove old classes

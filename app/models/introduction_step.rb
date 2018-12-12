@@ -1,7 +1,9 @@
 class IntroductionStep < ActiveRecord::Base
+  include Redmine::SafeAttributes
+
   unloadable
 
-  attr_accessible :step, :text, :position, :selector, :url
+  safe_attributes :step, :text, :position, :selector, :url
 
   belongs_to :introduction
 

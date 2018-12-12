@@ -1,4 +1,4 @@
-class AddParametersToIntroductionsUsers < ActiveRecord::Migration
+class AddParametersToIntroductionsUsers < ActiveRecord::Migration[4.2]
   def self.up
     drop_table :introductions_users
     create_table :introductions_users do |t|

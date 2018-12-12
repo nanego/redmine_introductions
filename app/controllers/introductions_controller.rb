@@ -1,7 +1,7 @@
 class IntroductionsController < ApplicationController
   unloadable
 
-  before_filter :require_admin, except: [:do_not_show_again, :show_again, :update_last_view_date]
+  before_action :require_admin, except: [:do_not_show_again, :show_again, :update_last_view_date]
   layout "admin"
 
   def index

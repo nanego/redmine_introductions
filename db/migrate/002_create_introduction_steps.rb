@@ -1,4 +1,4 @@
-class CreateIntroductionSteps < ActiveRecord::Migration
+class CreateIntroductionSteps < ActiveRecord::Migration[4.2]
   def change
     create_table :introduction_steps do |t|
       t.integer :introduction_id

@@ -1,4 +1,4 @@
-class AddTestUrlToIntroductions < ActiveRecord::Migration
+class AddTestUrlToIntroductions < ActiveRecord::Migration[4.2]
   def self.up
     add_column :introductions, :test_url, :string
   end
