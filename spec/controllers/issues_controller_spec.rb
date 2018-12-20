@@ -38,16 +38,16 @@ describe IssuesController, type: :controller do
   end
 
   it "should get edit and DO NOT display any warning message" do
-    Setting.plugin_redmine_introductions = {"display_issue_update_warning"=>"0", "issue_update_warning"=>"<p id='errorExplanation'>This text will not be shown.</p>"}
-    get :edit, :id => Issue.find(1).to_param
-    expect(response).to be_success
+    Setting.plugin_redmine_introductions = {"display_issue_update_warning" => "0", "issue_update_warning" => "<p id='errorExplanation'>This text will not be shown.</p>"}
+    get :edit, params: {:id => Issue.find(1).to_param}
+    expect(response).to be_successful
     expect(response.body).to_not match /<p id="errorExplanation">/im
   end
 
   it "should get edit and DISPLAY a warning message" do
-    Setting.plugin_redmine_introductions = {"display_issue_update_warning"=>"1", "issue_update_warning"=>"Any message."}
-    get :edit, :id => Issue.find(1).to_param
-    expect(response).to be_success
+    Setting.plugin_redmine_introductions = {"display_issue_update_warning" => "1", "issue_update_warning" => "Any message."}
+    get :edit, params: {:id => Issue.find(1).to_param}
+    expect(response).to be_successful
     expect(response.body).to match /<p id="errorExplanation">Any message.<\/p>/im
   end
 

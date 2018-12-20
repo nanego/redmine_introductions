@@ -15,8 +15,8 @@ class IntroductionsController < ApplicationController
   end
 
   def create
-    @introduction = Introduction.new(params[:introduction])
-
+    @introduction = Introduction.new
+    @introduction.safe_attributes = params[:introduction]
     @introduction.introduction_steps.each do |s|
       s.step = 1 if s.step.blank?
     end
@@ -42,7 +42,8 @@ class IntroductionsController < ApplicationController
     @introduction = Introduction.find(params[:id])
 
     respond_to do |format|
-      if @introduction.update_attributes(params[:introduction])
+      @introduction.safe_attributes = params[:introduction]
+      if @introduction.save
         format.html { redirect_to introductions_url, notice: 'Introduction was successfully updated.' }
         format.json { head :no_content }
       else
