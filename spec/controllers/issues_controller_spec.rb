@@ -34,6 +34,7 @@ describe IssuesController, type: :controller do
   render_views
 
   before do
+    User.current = User.find(1)
     @request.session[:user_id] = 1
   end
 

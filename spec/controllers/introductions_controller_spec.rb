@@ -2,16 +2,15 @@ require "spec_helper"
 require "active_support/testing/assertions"
 
 describe IntroductionsController, type: :controller do
+  include ActiveSupport::Testing::Assertions
+
+  fixtures :introductions, :users
+
   let(:name) do
     put :update, params: {:id => Introduction.find(1).to_param, :introduction => {}}
   end
 
-  include ActiveSupport::Testing::Assertions
-
-  self.fixture_path = File.dirname(__FILE__) + "/../fixtures/"
-  fixtures :introductions
-
-  before do
+  before :each do
     @request.session[:user_id] = 1
   end
 
