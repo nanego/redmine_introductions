@@ -6,9 +6,9 @@ module RedmineIntroductions
 
     def view_layouts_base_html_head(context)
       stylesheet_link_tag("introjs", :plugin => "redmine_introductions") +
-        javascript_include_tag("introjs", :plugin => "redmine_introductions") +
         stylesheet_link_tag("introductions", :plugin => "redmine_introductions") +
-        javascript_include_tag("introductions", :plugin => "redmine_introductions")
+        javascript_include_tag("introjs", :plugin => "redmine_introductions", async: true) +
+        javascript_include_tag("introductions", :plugin => "redmine_introductions", async: true)
     end
 
     # check if an introduction is active
