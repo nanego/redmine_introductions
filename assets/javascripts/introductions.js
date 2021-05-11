@@ -5,7 +5,7 @@ function setIntroParams(selector, text, position, step) {
 }
 
 function startIntroductions(first_url, intro_id, next_url, next_step_id, selectors, current_step) {
-    if(validateSelectorsPresence(selectors)){
+    if(selectors){
         if(next_url != ""){
             intro = introJs().setOptions({
                 'tooltipClass': "introJsTooltipClass",
@@ -79,14 +79,4 @@ function updateStepsPriorities() {
         $(this).find('.label_step_priority').html(i);
         i++;
     });
-}
-
-function validateSelectorsPresence(selectors) {
-    for(var i = 0; i < selectors.length; i++)
-    {
-        if($(selectors[i]).length<1){
-            return false;
-        }
-    }
-    return true;
 }
