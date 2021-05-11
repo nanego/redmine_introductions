@@ -3003,7 +3003,7 @@
         exitIntro.call(self, self._targetElement);
       };
 
-      tooltipHeaderLayer.appendChild(skipTooltipButton); //in order to prevent displaying previous button always
+      // tooltipHeaderLayer.appendChild(skipTooltipButton); //in order to prevent displaying previous button always
 
       if (this._introItems.length > 1) {
         buttonsLayer.appendChild(prevTooltipButton);

@@ -289,6 +289,8 @@ tr.introjs-showElement > th {
   float: right; }
 
 .introjs-disabled {
+  display: none;
+  /*
   color: #9e9e9e;
   border-color: #bdbdbd;
   -webkit-box-shadow: none;
@@ -296,7 +298,8 @@ tr.introjs-showElement > th {
   cursor: default;
   background-color: #f4f4f4;
   background-image: none;
-  text-decoration: none; }
+  text-decoration: none;
+  */ }
   .introjs-disabled:hover, .introjs-disabled:focus {
     color: #9e9e9e;
     border-color: #bdbdbd;
