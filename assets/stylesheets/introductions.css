@@ -173,14 +173,6 @@ a.btn-replay:hover, a.btn-leave:hover {
     color: darkgrey;
 }
 
-.tooltipDelayIntro {
-    background-color: #f0f0f0;
-    color: darkgrey;
-    font-size: 10px;
-    padding: 5px;
-    float: left;
-}
-
 .reactivate_users.three_columns {
     -webkit-columns: 3;
     -moz-columns: 3;

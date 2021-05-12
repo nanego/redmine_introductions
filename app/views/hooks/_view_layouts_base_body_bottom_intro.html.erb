@@ -1,28 +1,28 @@
 <script type="text/javascript">
-  //<![CDATA[
-  $(function() {
+    //<![CDATA[
+    $(function () {
 
-    <% if params[:no_intro] != 'true' %>
+        <% if params[:no_intro] != 'true' %>
 
-      var intro_id = 0;
-      var next_url = "";
-      var next_step_number = 0;
-      var selectors = [];
-      var nbIntros = 0;
-      var current_step = 1;
-      <% if params[:intro_step] %>
+        var intro_id = 0;
+        var next_url = "";
+        var next_step_number = 0;
+        var selectors = [];
+        var nbIntros = 0;
+        var current_step = 1;
+        <% if params[:intro_step] %>
         current_step = <%= params[:intro_step] %>;
-      <% end %>
+        <% end %>
 
-      <% if params[:intro_id]
-          @intros = [Introduction.find(params[:intro_id])]
-          @intros.each { |intro| intro.url = intro.url[0...-1] if intro.url[intro.url.length-1]=='$' } #remove this specific regex in order to test the intro
-        else
-          @intros = Introduction.active.not_disabled_by_user(User.current)
-        end
-      %>
+        <% if params[:intro_id]
+            @intros = [Introduction.find(params[:intro_id])]
+            @intros.each { |intro| intro.url = intro.url[0...-1] if intro.url[intro.url.length-1]=='$' } #remove this specific regex in order to test the intro
+          else
+            @intros = Introduction.active.not_disabled_by_user(User.current)
+          end
+        %>
 
-      <% @intros.each do |intro| %>
+        <% @intros.each do |intro| %>
 
         <% lastView = IntroductionsUser.find_by_introduction_id_and_user_id(intro.id, User.current.id) %>
 
@@ -36,71 +36,72 @@
 
         <% if ((User.current.pref[:no_introductions] == nil || User.current.pref[:no_introductions] == "0") && (lastView == nil || lastView.blocked == false && lastView.last_view < Time.now - 1.day) && (intro.url.blank? || request.fullpath =~ Regexp.new("#{intro.url}"))) || (params[:multipage] && params[:intro_step]) %>
 
-          nbIntros++;
+        nbIntros++;
 
-          <% previous_step = nil
-             params[:multipage] && params[:intro_step] ? started = false : started = true
-          %>
+        <% previous_step = nil
+           params[:multipage] && params[:intro_step] ? started = false : started = true
+        %>
 
-          <% previous_steps_on_the_page = [] %>
+        <% previous_steps_on_the_page = [] %>
 
-          <% intro.introduction_steps.each do |step| %>
+        <% intro.introduction_steps.each do |step| %>
 
-            <% if step %>
+        <% if step %>
 
-              <% if step.url.present? && step.url.length > 0 && step.step.to_i <= params[:intro_step].to_i %>
-                current_step = current_step - <%= previous_steps_on_the_page.size %>;
-                <% previous_steps_on_the_page = [] %>
-              <% end %>
-
-              <% started = true if params[:intro_step] == step.step.to_param %>
-              <% if started %>
-                <% if step.url && !step.url.blank? && previous_step && step.url != previous_step.url %>
-                    intro_id = <%= intro.id %>;
-                    next_url = "<%= step.url %>";
-                    next_step_number = <%= step.step %>;
-                    <% break %>
-                <% else %>
-                    <% step.text << bottom_buttons(intro, step, params) %>
-                    setIntroParams("<%= escape_javascript(raw step.selector) %>", "<%= escape_javascript(step.text.html_safe) %>", "<%= escape_javascript(raw step.position) %>", "<%= escape_javascript(raw step.step) %>");
-                    selectors.push("<%= escape_javascript(raw step.selector) %>");
-                <% end %>
-                <% previous_step = step %>
-              <% else
-                previous_steps_on_the_page << step if (step.step.to_i < params[:intro_step].to_i)
-              end %>
-
-            <% end %>
-
-            <% if previous_steps_on_the_page.present?
-                previous_steps_on_the_page.each do |previous_step|
-                  previous_step.text << bottom_buttons(intro, previous_step, params) %>
-                  setIntroParams("<%= escape_javascript(raw previous_step.selector) %>", "<%= escape_javascript(previous_step.text.html_safe) %>", "<%= escape_javascript(raw previous_step.position) %>", "<%= escape_javascript(raw previous_step.step) %>");
-                  selectors.push("<%= escape_javascript(raw previous_step.selector) %>");
-            <%  end
-              end
-            end
-          end %>
-      <% end %>
-
-      if (nbIntros>0){
-        <% locales = { "nextPage"=>l('nextPage'),
-                       "quit"=>l('quit'),
-                       "prevLabel"=>l('prevLabel'),
-                       "nextLabel"=>l('nextLabel')
-                     }
-         %>
-        window.I18n = <%= locales.to_json.html_safe %>
-        var first_url
-        <% if params[:first_url] %>
-          first_url = '<%= params[:first_url] %>'
+        <% if step.url.present? && step.url.length > 0 && step.step.to_i <= params[:intro_step].to_i %>
+        current_step = current_step - <%= previous_steps_on_the_page.size %>;
+        <% previous_steps_on_the_page = [] %>
         <% end %>
 
-        startIntroductions(first_url || window.location.pathname, intro_id, next_url, next_step_number, selectors, current_step);
-      }
+        <% started = true if params[:intro_step] == step.step.to_param %>
+        <% if started %>
+        <% if step.url && !step.url.blank? && previous_step && step.url != previous_step.url %>
+        intro_id = <%= intro.id %>;
+        next_url = "<%= step.url %>";
+        next_step_number = <%= step.step %>;
+        <% break %>
+        <% else %>
+        <% step.text << bottom_buttons(intro, step, params) %>
+        Introductions.setIntroParams("<%= escape_javascript(raw step.selector) %>", "<%= escape_javascript(step.text.html_safe) %>", "<%= escape_javascript(raw step.position) %>", "<%= escape_javascript(raw step.step) %>");
+        selectors.push("<%= escape_javascript(raw step.selector) %>");
+        <% end %>
+        <% previous_step = step %>
+        <% else
+          previous_steps_on_the_page << step if (step.step.to_i < params[:intro_step].to_i)
+        end %>
 
-    <% end %>
+        <% end %>
 
-  });
-  //]]>
+        <% if previous_steps_on_the_page.present?
+            previous_steps_on_the_page.each do |previous_step|
+              previous_step.text << bottom_buttons(intro, previous_step, params) %>
+        Introductions.setIntroParams("<%= escape_javascript(raw previous_step.selector) %>", "<%= escape_javascript(previous_step.text.html_safe) %>", "<%= escape_javascript(raw previous_step.position) %>", "<%= escape_javascript(raw previous_step.step) %>");
+        selectors.push("<%= escape_javascript(raw previous_step.selector) %>");
+        <%  end
+          end
+        end
+      end %>
+        <% end %>
+
+        if (nbIntros > 0) {
+            <% locales = { "nextPage"=>l('nextPage'),
+                           "quit"=>l('quit'),
+                           "prevLabel"=>l('prevLabel'),
+                           "nextLabel"=>l('nextLabel')
+                         }
+             %>
+            window.I18n =
+            <%= locales.to_json.html_safe %>
+            var first_url
+            <% if params[:first_url] %>
+            first_url = '<%= params[:first_url] %>'
+            <% end %>
+
+            Introductions.startIntroductions(first_url || window.location.pathname, intro_id, next_url, next_step_number, selectors, current_step);
+        }
+
+        <% end %>
+
+    });
+    //]]>
 </script>
