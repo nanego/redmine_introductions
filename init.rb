@@ -3,6 +3,7 @@ require_dependency 'redmine_introductions/hooks'
 
 Rails.application.config.to_prepare do
   require_dependency 'redmine_introductions/user_preference_patch'
+  require_dependency 'redmine_introductions/user_patch'
 end
 
 Redmine::Plugin.register :redmine_introductions do
