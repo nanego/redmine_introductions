@@ -2,8 +2,8 @@ require File.dirname(__FILE__) + '/../../app/helpers/introductions_helper'
 include IntroductionsHelper
 
 module RedmineIntroductions
-  class Hooks < Redmine::Hook::ViewListener
 
+  class Hooks < Redmine::Hook::ViewListener
     def view_layouts_base_html_head(context)
       stylesheet_link_tag("introjs", :plugin => "redmine_introductions") +
         stylesheet_link_tag("introductions", :plugin => "redmine_introductions") +
@@ -13,6 +13,13 @@ module RedmineIntroductions
 
     # check if an introduction is active
     render_on :view_layouts_base_body_bottom, :partial => 'hooks/view_layouts_base_body_bottom_intro'
-
   end
+
+  class ModelHook < Redmine::Hook::Listener
+    def after_plugins_loaded(_context = {})
+      require_relative 'user_preference_patch'
+      require_relative 'user_patch'
+    end
+  end
+
 end
