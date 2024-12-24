@@ -18,3 +18,10 @@ Redmine::Plugin.register :redmine_introductions do
                'issue_update_warning' => "Merci d'actualiser le statut et l'assignation avant d'enregistrer vos modifications.",
            }
 end
+
+# Support for Redmine 5
+if Redmine::VERSION::MAJOR < 6
+  class ApplicationRecord < ActiveRecord::Base
+    self.abstract_class = true
+  end
+end

@@ -1,7 +1,5 @@
-class IntroductionsUser < ActiveRecord::Base
+class IntroductionsUser < ApplicationRecord
   include Redmine::SafeAttributes
-
-  unloadable
 
   safe_attributes :last_view, :blocked, :introduction_id, :user_id
 

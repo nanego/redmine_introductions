@@ -1,4 +1,4 @@
-class Introduction < ActiveRecord::Base
+class Introduction < ApplicationRecord
   include Redmine::SafeAttributes
 
   POSITIONS = {l('bottom') => 'bottom',

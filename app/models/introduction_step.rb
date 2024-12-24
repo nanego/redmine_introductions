@@ -1,7 +1,5 @@
-class IntroductionStep < ActiveRecord::Base
+class IntroductionStep < ApplicationRecord
   include Redmine::SafeAttributes
-
-  unloadable
 
   safe_attributes :step, :text, :position, :selector, :url
 
