@@ -1,9 +1,8 @@
 <% html_title(l(:label_introductions)) %>
 
 <div class="contextual">
-  <%= link_to(l(:label_new_introduction),
-              {:controller => 'introductions', :action => 'new'},
-              :class => 'icon icon-add') %>
+  <%= link_to(sprite_icon('add', l(:label_new_introduction)),
+              {:controller => 'introductions', :action => 'new'}) %>
 </div>
 
 <h2><%=h "#{l(:label_introductions)}" %></h2>
@@ -40,8 +39,8 @@
           <td><%= format_date(introduction.start_at) %></td>
           <td><%= format_date(introduction.stop_at) %></td>
           <td class="buttons">
-              <%= link_to l(:button_start), link_to_intro_test(introduction), target: "_blank", :class => 'icon icon-test' %>
-              <%= link_to l(:button_edit), edit_introduction_path(id: introduction.id), :class => 'icon icon-edit' %>
+              <%= link_to sprite_icon('arrow-right', l(:button_start)), link_to_intro_test(introduction), target: "_blank" %>
+              <%= link_to sprite_icon('edit', l(:button_edit)), edit_introduction_path(id: introduction.id) %>
               <%= delete_link introduction_path(introduction) %>
           </td>
         </tr>
