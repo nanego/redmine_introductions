@@ -11,7 +11,9 @@ Redmine::Plugin.register :redmine_introductions do
   author_url 'mailto:contact@vincent-robert.com'
   menu :admin_menu, :introductions, {:controller => 'introductions', :action => 'index'},
        :caption => :introductions,
-       :html => {:class => 'icon'}
+       :icon => 'presentation',
+       :plugin => 'redmine_introductions',
+       :html => {:class => 'icon icon-presentation'}
   settings :partial => 'settings/introductions_settings',
            :default => {
                'display_issue_update_warning' => '0',
